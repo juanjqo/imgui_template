@@ -11,5 +11,6 @@
 ```shell
 brew install glfw
 brew install fmt
+brew install eigen
 ```
 
