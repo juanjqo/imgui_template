@@ -1,4 +1,5 @@
-![Static Badge](https://img.shields.io/badge/Platform-Apple_silicon-blue)![Static Badge](https://img.shields.io/badge/Platform-Ubuntu_x64-orange)
+![Static Badge](https://img.shields.io/badge/Platform-Apple_silicon-blue)![Static Badge](https://img.shields.io/badge/Ubuntu_x64-orange)
+
 
 
 # Imgui_template
