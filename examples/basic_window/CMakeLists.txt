@@ -23,6 +23,7 @@ endif()
 if(APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME}
                             imgui
+                            implot
                             glfw
                             "-framework Cocoa"
                             "-framework OpenGL"

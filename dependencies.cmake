@@ -67,6 +67,7 @@ set(IMPLOT_HEADERS
 set(IMPLOT_SRC
     ${IMPLOT_DIR}/implot.cpp
     ${IMPLOT_DIR}/implot_items.cpp
+    ${IMPLOT_DIR}/implot_demo.cpp
 )
 
 #find_package(OpenGL REQUIRED)

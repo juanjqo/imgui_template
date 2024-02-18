@@ -17,6 +17,8 @@
 #endif
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 #include <implot.h>
+#include <implot_internal.h>
+
 
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
 // To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
@@ -29,6 +31,8 @@
 #ifdef __EMSCRIPTEN__
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
+
+
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -79,6 +83,8 @@ int main(int, char**)
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
+    ImPlot::CreateContext();
+
     // Setup Dear ImGui style
     //ImGui::StyleColorsDark();
     ImGui::StyleColorsLight();
@@ -112,6 +118,7 @@ int main(int, char**)
     // Our state
     bool show_demo_window = false;
     bool show_another_window = false;
+    bool show_demo_plot = true;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 // Main loop
@@ -137,6 +144,9 @@ int main(int, char**)
         ImGui::NewFrame();
 
         //------------------------Your Code Here--------------------------------
+        ImPlot::ShowDemoWindow(& show_demo_plot);
+
+        //ImPlot::EndPlot();
 
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
         {
@@ -159,10 +169,12 @@ int main(int, char**)
 
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
             ImGui::End();
+
+
         }
 
 
-
+        //---------------------------------------------------------------
         // Rendering
         ImGui::Render();
         int display_w, display_h;
