@@ -83,7 +83,7 @@ int main(int, char**)
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
-
+    ImPlot::CreateContext();
 
     // Setup Dear ImGui style
     //ImGui::StyleColorsDark();
@@ -144,7 +144,9 @@ int main(int, char**)
         ImGui::NewFrame();
 
         //------------------------Your Code Here--------------------------------
+        ImPlot::ShowDemoWindow(& show_demo_plot);
 
+        //ImPlot::EndPlot();
 
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
         {
