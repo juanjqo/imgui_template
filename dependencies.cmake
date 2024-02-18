@@ -7,7 +7,29 @@ set (COMMONS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../commons)
 if(UNIX AND NOT APPLE)
     FIND_PACKAGE(Eigen3 REQUIRED)
     INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIR})
+    find_package(OpenGL REQUIRED)
+    #FIND_PACKAGE(GLFW3 REQUIRED)
     ADD_COMPILE_OPTIONS(-Werror=return-type -Wall -Wextra -Wmissing-declarations -Wredundant-decls -Woverloaded-virtual)
+
+    # GLFW
+    set(GLFW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../glfw) # Set this to point to an up-to-date GLFW repo
+    option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
+    option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
+    option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
+    option(GLFW_INSTALL "Generate installation target" OFF)
+    option(GLFW_DOCUMENT_INTERNALS "Include internals in documentation" OFF)
+    add_subdirectory(${GLFW_DIR} binary_dir EXCLUDE_FROM_ALL)
+
+    # sudo apt-get update
+    # sudo apt install xorg-dev
+    # sudo apt install libwayland-dev libxkbcommon-dev wayland-protocols extra-cmake-modules
+
+    include_directories(${GLFW_DIR}/include)
+    #set(LIBRARIES "glfw")
+    # FETCH CONTENT LIBS
+    #include(FetchContent)
+    #FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw)
+    #FetchContent_MakeAvailable(glfw)
 endif()
 
 if(APPLE)
@@ -71,7 +93,7 @@ set(IMPLOT_SRC
     ${IMPLOT_DIR}/implot_demo.cpp
 )
 
-#find_package(OpenGL REQUIRED)
+
 
 add_library(imgui ${IMGUI_HEADERS} ${IMGUI_SRC})
 add_library(implot ${IMPLOT_HEADERS} ${IMPLOT_SRC})

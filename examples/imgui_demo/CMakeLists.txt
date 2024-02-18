@@ -17,7 +17,8 @@ if(UNIX AND NOT APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME}
                             imgui
                             implot
-                            glfw )
+                            glfw
+                            OpenGL::GL)
 endif()
 
 if(APPLE)
