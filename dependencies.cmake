@@ -2,7 +2,7 @@
 
 set (IMGUI_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/../../imgui)
 set (IMPLOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../implot)
-
+set (COMMONS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../commons)
 
 if(UNIX AND NOT APPLE)
     FIND_PACKAGE(Eigen3 REQUIRED)
@@ -33,6 +33,7 @@ endif()
 include_directories(${IMGUI_DIR})
 include_directories(${IMGUI_DIR}/backends)
 include_directories(${IMPLOT_DIR})
+include_directories(${COMMONS_DIR})
 
 
 set(IMGUI_HEADERS
