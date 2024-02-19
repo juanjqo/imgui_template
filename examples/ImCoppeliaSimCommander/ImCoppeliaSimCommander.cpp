@@ -1,6 +1,5 @@
 #include <my_imgui_definitions.h>
 
-
 // Main code
 int main(int, char**)
 {
@@ -8,10 +7,10 @@ int main(int, char**)
     if (!glfwInit())
         return 1;
 
-    #include <decide_gl_glsl_versions.h>
+#include <decide_gl_glsl_versions.h>
 
     // Create window with graphics context
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 example", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "ImCoppeliaSim Commander by Juan Jose Quiroz Omana", nullptr, nullptr);
     if (window == nullptr)
         return 1;
     glfwMakeContextCurrent(window);
@@ -23,6 +22,9 @@ int main(int, char**)
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+
+
 
     // Setup Dear ImGui style
     //ImGui::StyleColorsDark();
@@ -52,9 +54,12 @@ int main(int, char**)
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != nullptr);
 
+    io.Fonts->AddFontFromFileTTF("../../fonts/Ubuntu/Ubuntu-Regular.ttf", 16.0f);
+    //IM_ASSERT(font != nullptr);
     // Our state
-    bool show_demo_window = true;
+    bool show_demo_window = false;
     bool show_another_window = false;
+    bool show_demo_plot = true;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 // Main loop
@@ -79,9 +84,8 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-        if (show_demo_window)
-            ImGui::ShowDemoWindow(&show_demo_window);
+        //------------------------Your Code Here--------------------------------
+
 
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
         {
@@ -90,9 +94,9 @@ int main(int, char**)
 
             ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
 
-            ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-            ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-            ImGui::Checkbox("Another Window", &show_another_window);
+            ImGui::Text("This is a basic example.");               // Display some text (you can use a format strings too)
+            //ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+            //ImGui::Checkbox("Another Window", &show_another_window);
 
             ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
             ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
@@ -104,18 +108,27 @@ int main(int, char**)
 
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
             ImGui::End();
-        }
 
-        // 3. Show another simple window.
-        if (show_another_window)
+
+        }
         {
-            ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-            ImGui::Text("Hello from another window!");
-            if (ImGui::Button("Close Me"))
-                show_another_window = false;
+
+
+            //const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
+            ImGui::SetNextWindowPos(ImVec2( ImGui::GetMainViewport()->WorkPos.x + 0,
+                                            ImGui::GetMainViewport()->WorkPos.y + 0),
+                                    ImGuiCond_Once); // ImGuiCond_Once ImGuiCond_FirstUseEver
+            ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_Once);
+            ImGui::Begin("Second Window");
+            ImGui::Text("This is a basic example 2.");
             ImGui::End();
         }
+        {
+//ImGui::ShowDemoWindow();
+        }
 
+
+        //---------------------------------------------------------------
         // Rendering
         ImGui::Render();
         int display_w, display_h;
