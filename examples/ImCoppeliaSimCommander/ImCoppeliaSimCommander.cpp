@@ -60,6 +60,7 @@ int main(int, char**)
     bool show_demo_window = false;
     bool show_another_window = false;
     bool show_demo_plot = true;
+    bool my_tool_active = true;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 // Main loop
@@ -115,12 +116,33 @@ int main(int, char**)
 
 
             //const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
-            ImGui::SetNextWindowPos(ImVec2( ImGui::GetMainViewport()->WorkPos.x + 0,
-                                            ImGui::GetMainViewport()->WorkPos.y + 0),
+            ImGui::SetNextWindowPos(ImVec2( ImGui::GetMainViewport()->WorkPos.x + 400,
+                                            ImGui::GetMainViewport()->WorkPos.y + 30),
                                     ImGuiCond_Once); // ImGuiCond_Once ImGuiCond_FirstUseEver
             ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_Once);
-            ImGui::Begin("Second Window");
+            ImGui::Begin("Second Window",&my_tool_active,ImGuiWindowFlags_MenuBar);
             ImGui::Text("This is a basic example 2.");
+
+            ImGui::PushItemWidth(ImGui::GetFontSize() * -12);
+            // Menu Bar
+            if (ImGui::BeginMenuBar())
+            {
+                if (ImGui::BeginMenu("Menu"))
+                {
+                    ImGui::Text("This is a basic menu.");
+                }
+                if (ImGui::BeginMenu("Examples"))
+                {
+                    ImGui::Text("This is a basic example.");
+                }
+                //if (ImGui::MenuItem("MenuItem")) {} // You can also use MenuItem() inside a menu bar!
+                if (ImGui::BeginMenu("Tools"))
+                {
+                    ImGui::Text("This is a basic tool.");
+                }
+                ImGui::EndMenuBar();
+            }
+
             ImGui::End();
         }
         {
