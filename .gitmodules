@@ -10,3 +10,15 @@
 [submodule "imgui-knobs"]
 	path = imgui-knobs
 	url = https://github.com/altschuler/imgui-knobs.git
+[submodule "submodules/imgui"]
+	path = submodules/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "submodules/implot"]
+	path = submodules/implot
+	url = https://github.com/epezent/implot.git
+[submodule "submodules/imgui-knobs"]
+	path = submodules/imgui-knobs
+	url = https://github.com/altschuler/imgui-knobs.git
+[submodule "submodules/glfw"]
+	path = submodules/glfw
+	url = https://github.com/glfw/glfw.git
