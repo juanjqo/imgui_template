@@ -1,7 +1,7 @@
 
 
-set (IMGUI_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/../../imgui)
-set (IMPLOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../implot)
+set (IMGUI_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/imgui)
+set (IMPLOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/implot)
 set (COMMONS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../commons)
 
 if(UNIX AND NOT APPLE)
@@ -12,7 +12,7 @@ if(UNIX AND NOT APPLE)
     ADD_COMPILE_OPTIONS(-Werror=return-type -Wall -Wextra -Wmissing-declarations -Wredundant-decls -Woverloaded-virtual)
 
     # GLFW
-    set(GLFW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../glfw) # Set this to point to an up-to-date GLFW repo
+    set(GLFW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/glfw) # Set this to point to an up-to-date GLFW repo
     option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
     option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
     option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
