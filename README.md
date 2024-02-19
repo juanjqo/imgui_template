@@ -7,7 +7,7 @@
 
 
 
-# MacOS requirements
+## MacOS requirements
 
 ```shell
 brew install glfw
@@ -15,7 +15,7 @@ brew install fmt
 brew install eigen
 ```
 
-# Ubuntu requirements
+## Ubuntu requirements
 
 ```shell
 sudo apt-get update
