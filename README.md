@@ -14,3 +14,14 @@ brew install fmt
 brew install eigen
 ```
 
+# Ubuntu requirements
+
+```shell
+sudo apt-get update
+sudo apt install xorg-dev
+sudo apt install libwayland-dev libxkbcommon-dev wayland-protocols extra-cmake-modules
+sudo apt install cmake g++ libeigen3-dev fakeroot
+
+```
+
+
