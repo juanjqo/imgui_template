@@ -25,4 +25,23 @@ sudo apt install cmake g++ libeigen3-dev fakeroot
 
 ```
 
+## Windows requirements
+
+###  Visual Studio Development Kit[](https://visualstudio.microsoft.com/es/)
+
+### Install [vcpkg](https://vcpkg.io/en/)
+
+Create a folder 'Tools' in 'C': 'C:\Tools'
+
+```shell
+cd C:\Tools
+git clone https://github.com/microsoft/vcpkg.git
+cd vcpkg; .\bootstrap-vcpkg.bat
+.\vcpkg.exe integrate install
+```
+
+```shell
+.\vcpkg.exe install opengl  
+.\vcpkg.exe install eigen3:x64-windows
+```
 
