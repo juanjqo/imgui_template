@@ -11,7 +11,14 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../../dependencies.cmake)
 add_executable(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.cpp)
 
 
-
+if (WIN32)
+    target_link_libraries(${CMAKE_PROJECT_NAME}
+                            imgui
+                            implot
+                            glfw
+                            OpenGL::GL
+                            )
+endif()
 
 if(UNIX AND NOT APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME}

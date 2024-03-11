@@ -1,8 +1,52 @@
+include(C:/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake)
+if (WIN32)
+    set(CMAKE_TOOLCHAIN_FILE C:/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake)
+endif()
 
 
 set (IMGUI_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/imgui)
 set (IMPLOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/implot)
 set (COMMONS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../commons)
+
+
+if (WIN32)
+    # GLFW
+    ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
+    FIND_PACKAGE(Eigen3 CONFIG REQUIRED)
+    #FIND_PACKAGE(glfw3 CONFIG REQUIRED)
+
+    find_package(OpenGL REQUIRED)
+    INCLUDE_DIRECTORIES(
+            ${EIGEN3_INCLUDE_DIR}
+            #${GLFW3_INCLUDE_DIRS}
+            # Default path when using cmake .., cmake --build ., cmake --install .
+            # "C:/Program Files (x86)/dqrobotics/include"
+            #"C:/Tools/vcpkg/installed/x64-windows/include/"
+            )
+
+    # GLFW
+    set(GLFW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/glfw) # Set this to point to an up-to-date GLFW repo
+    option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
+    option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
+    option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
+    option(GLFW_INSTALL "Generate installation target" OFF)
+    option(GLFW_DOCUMENT_INTERNALS "Include internals in documentation" OFF)
+    add_subdirectory(${GLFW_DIR} binary_dir EXCLUDE_FROM_ALL)
+
+
+
+    include_directories(${GLFW_DIR}/include)
+
+    message(STATUS "GLFW3_INCLUDE_PATH=${GLFW_DIR}")
+    #if(GLFW_FOUND) # Works with some other methods
+    #        message(STATUS "GLFW3_INCLUDE_PATH=${GLFW3_INCLUDE_PATH}")
+    #        message(STATUS "GLFW_LIBRARIES=${GLFW_LIBRARIES}")
+    #else( GLFW_FOUND )
+    #    message(FATAL_ERROR "GLFW3 not found")
+    #endif( GLFW_FOUND )
+endif()
+
+
 
 if(UNIX AND NOT APPLE)
     FIND_PACKAGE(Eigen3 REQUIRED)
