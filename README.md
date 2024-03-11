@@ -1,4 +1,4 @@
-![Static Badge](https://img.shields.io/badge/Platform-Apple_silicon-blue)![Static Badge](https://img.shields.io/badge/Ubuntu_x64-orange)![Static Badge](https://img.shields.io/badge/backend-glfw_opengl3-green)
+![Static Badge](https://img.shields.io/badge/Platform-Apple_silicon-magenta)![Static Badge](https://img.shields.io/badge/Ubuntu_x64-orange)![Static Badge](https://img.shields.io/badge/Windows_11_x64-blue)![Static Badge](https://img.shields.io/badge/backend-glfw_opengl3-green)
 
 
 
