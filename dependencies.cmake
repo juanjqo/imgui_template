@@ -137,8 +137,7 @@ set(IMPLOT_SRC
     ${IMPLOT_DIR}/implot_demo.cpp
 )
 
-
-
+add_library(juangui_wrapper ${COMMONS_DIR}/juangui_wrapper.cpp)
 add_library(imgui ${IMGUI_HEADERS} ${IMGUI_SRC})
 add_library(implot ${IMPLOT_HEADERS} ${IMPLOT_SRC})
 

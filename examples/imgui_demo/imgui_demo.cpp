@@ -25,8 +25,8 @@ int main(int, char**)
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
     // Setup Dear ImGui style
-    //ImGui::StyleColorsDark();
-    ImGui::StyleColorsLight();
+    ImGui::StyleColorsDark();
+    //ImGui::StyleColorsLight();
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -99,6 +99,15 @@ int main(int, char**)
 
             if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
                 counter++;
+
+            if (counter%2 == 0)
+            {
+                ImGui::StyleColorsDark();
+                //ImGui::StyleColorsLight();
+            }else{
+                ImGui::StyleColorsLight();
+            }
+
             ImGui::SameLine();
             ImGui::Text("counter = %d", counter);
 
