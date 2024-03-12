@@ -30,6 +30,7 @@ if(UNIX AND NOT APPLE)
                             imgui
                             implot
                             glfw
+                            OpenGL::GL
                             basic_window_wrapper)
 endif()
 
