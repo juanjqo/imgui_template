@@ -21,7 +21,6 @@ if (WIN32)
                             implot
                             glfw
                             OpenGL::GL
-                            #juangui_wrapper
                             basic_window_wrapper
                             )
 endif()
@@ -31,14 +30,14 @@ if(UNIX AND NOT APPLE)
                             imgui
                             implot
                             glfw
-                            juangui_wrapper)
+                            basic_window_wrapper)
 endif()
 
 if(APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME}
                             imgui
                             implot
-                            juangui_wrapper
+                            basic_window_wrapper
                             glfw
                             "-framework Cocoa"
                             "-framework OpenGL"
