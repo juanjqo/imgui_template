@@ -34,7 +34,39 @@ void Basic_Window_Wrapper::my_custom_gui()
 
         //ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
         ImGui::End();
+    }
+    static bool my_tool_active = true;
+    {
 
 
+        //const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(ImVec2( ImGui::GetMainViewport()->WorkPos.x + 400,
+                                       ImGui::GetMainViewport()->WorkPos.y + 30),
+                                ImGuiCond_Once); // ImGuiCond_Once ImGuiCond_FirstUseEver
+        ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_Once);
+        ImGui::Begin("Second Window",&my_tool_active,ImGuiWindowFlags_MenuBar);
+        ImGui::Text("This is a basic example 2.");
+
+        ImGui::PushItemWidth(ImGui::GetFontSize() * -12);
+        // Menu Bar
+        if (ImGui::BeginMenuBar())
+        {
+            if (ImGui::BeginMenu("Menu"))
+            {
+                ImGui::Text("This is a basic menu.");
+            }
+            if (ImGui::BeginMenu("Examples"))
+            {
+                ImGui::Text("This is a basic example.");
+            }
+            //if (ImGui::MenuItem("MenuItem")) {} // You can also use MenuItem() inside a menu bar!
+            if (ImGui::BeginMenu("Tools"))
+            {
+                ImGui::Text("This is a basic tool.");
+            }
+            ImGui::EndMenuBar();
+        }
+
+        ImGui::End();
     }
 }
