@@ -100,11 +100,20 @@ void JuanGui_Wrapper::cleanup()
     glfwTerminate();
 }
 
+
+/**
+ * @brief JuanGui_Wrapper::window_should_close
+ * @return
+ */
 bool JuanGui_Wrapper::window_should_close()
 {
     return glfwWindowShouldClose(window_);
 }
 
+
+/**
+ * @brief JuanGui_Wrapper::render
+ */
 void JuanGui_Wrapper::render()
 {
     // Rendering
@@ -120,6 +129,33 @@ void JuanGui_Wrapper::render()
     glfwSwapBuffers(window_);
 }
 
+
+/**
+ * @brief JuanGui_Wrapper::loop
+ */
+void JuanGui_Wrapper::loop()
+{
+// Main loop
+#ifdef __EMSCRIPTEN__
+    // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
+    // You may manually call LoadIniSettingsFromMemory() to load settings from your own storage.
+    io.IniFilename = nullptr;
+    EMSCRIPTEN_MAINLOOP_BEGIN
+#else
+    while (!window_should_close())
+#endif
+    {
+        gui();
+    }
+#ifdef __EMSCRIPTEN__
+    EMSCRIPTEN_MAINLOOP_END;
+#endif
+}
+
+
+/**
+ * @brief JuanGui_Wrapper::gui
+ */
 void JuanGui_Wrapper::gui()
 {
     // Poll and handle events (inputs, window resize, etc.)
@@ -128,40 +164,12 @@ void JuanGui_Wrapper::gui()
     // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
     // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
     glfwPollEvents();
-
     // Start the Dear ImGui frame
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-
-    //------------------------Your Code Here--------------------------------
-
-
-    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-    {
-        static float f = 0.0f;
-        static int counter = 0;
-
-        ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-        ImGui::Text("This is a basic example.");               // Display some text (you can use a format strings too)
-        //ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-        //ImGui::Checkbox("Another Window", &show_another_window);
-
-        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-        ImGui::ColorEdit3("clear color", (float*)&clear_color_); // Edit 3 floats representing a color
-
-        if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-            counter++;
-        ImGui::SameLine();
-        ImGui::Text("counter = %d", counter);
-
-        //ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-        ImGui::End();
-
-
-    }
-
+    my_custom_gui();
+    render();
 }
 
 void JuanGui_Wrapper::set_screen_mode(const SCREEN_MODE& mode)

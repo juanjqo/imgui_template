@@ -1,4 +1,5 @@
 #pragma once
+#include <my_imgui_definitions.h>
 #include <memory>
 #include<my_imgui_definitions.h>
 #include <string>
@@ -23,20 +24,25 @@ public:
                     const JuanGui_Wrapper::SCREEN_MODE& mode = JuanGui_Wrapper::SCREEN_MODE::LIGHT_MODE,
                     const JuanGui_Wrapper::FONT& font = JuanGui_Wrapper::FONT::UBUNTU,
                     const double& font_size = 18.0);
+    JuanGui_Wrapper() = delete;
+    JuanGui_Wrapper(const JuanGui_Wrapper&) = delete;
+    JuanGui_Wrapper& operator= (const JuanGui_Wrapper&) = delete;
 
-
+    GLFWwindow* get_glfw_ptr();
     void check_error_callback();
 
     void cleanup();
-
-    bool window_should_close();
     void render();
-
-    void gui();
-
+    bool window_should_close();
     void set_screen_mode(const JuanGui_Wrapper::SCREEN_MODE& mode);
+    void gui();
+    void loop();
 
-    GLFWwindow* get_glfw_ptr();
+    virtual void my_custom_gui() = 0;
+
+
+
+
 
 
 

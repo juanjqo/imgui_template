@@ -8,7 +8,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../dependencies.cmake)
 
-add_executable(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.cpp)
+add_library (basic_window_wrapper basic_window_wrapper.h basic_window_wrapper.cpp)
+target_link_libraries(basic_window_wrapper juangui_wrapper)
+
+add_executable(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.cpp
+    )
 
 
 if (WIN32)
@@ -17,7 +21,8 @@ if (WIN32)
                             implot
                             glfw
                             OpenGL::GL
-                            juangui_wrapper
+                            #juangui_wrapper
+                            basic_window_wrapper
                             )
 endif()
 
