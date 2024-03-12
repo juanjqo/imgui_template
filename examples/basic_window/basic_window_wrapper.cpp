@@ -1,5 +1,7 @@
 #include "basic_window_wrapper.h"
 
+
+
 Basic_Window_Wrapper::Basic_Window_Wrapper(const int& width,
                                             const int& height,
                                             const std::string& title,
@@ -10,6 +12,8 @@ Basic_Window_Wrapper::Basic_Window_Wrapper(const int& width,
 {
 
 }
+
+
 
 void Basic_Window_Wrapper::my_custom_gui()
 {
@@ -35,6 +39,22 @@ void Basic_Window_Wrapper::my_custom_gui()
         //ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
         ImGui::End();
     }
+
+    {
+        int my_image_width = 0;
+        int my_image_height = 0;
+        GLuint my_image_texture = 0;
+        bool ret = LoadTextureFromFile("../../images/example.jpg", &my_image_texture, &my_image_width, &my_image_height);
+        IM_ASSERT(ret);
+
+        ImGui::Begin("OpenGL Texture Text");
+        //ImGui::Text("pointer = %x", my_image_texture);
+        //ImGui::Text("size = %d x %d", my_image_width, my_image_height);
+        ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+        ImGui::End();
+    }
+
+    /*
     static bool my_tool_active = true;
     {
 
@@ -68,5 +88,5 @@ void Basic_Window_Wrapper::my_custom_gui()
         }
 
         ImGui::End();
-    }
+    }*/
 }

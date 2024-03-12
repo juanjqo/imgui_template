@@ -1,5 +1,6 @@
-include(C:/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake)
+
 if (WIN32)
+    include(C:/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake)
     set(CMAKE_TOOLCHAIN_FILE C:/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake)
 endif()
 
@@ -7,7 +8,7 @@ endif()
 set (IMGUI_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/imgui)
 set (IMPLOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/implot)
 set (COMMONS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../commons)
-
+set (STB_DIRS    ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/stb)
 
 if (WIN32)
     # GLFW
@@ -100,6 +101,7 @@ include_directories(${IMGUI_DIR})
 include_directories(${IMGUI_DIR}/backends)
 include_directories(${IMPLOT_DIR})
 include_directories(${COMMONS_DIR})
+include_directories(${STB_DIRS})
 
 
 set(IMGUI_HEADERS
