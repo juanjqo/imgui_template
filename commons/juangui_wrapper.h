@@ -12,7 +12,8 @@ class JuanGui_Wrapper
 
 
 protected:
-
+    //ImGuiIO& io_ = ImGui::GetIO();
+    //ImGuiIO& io_ = 0;
     GLFWwindow* window_;
     ImVec4 clear_color_ = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 public:

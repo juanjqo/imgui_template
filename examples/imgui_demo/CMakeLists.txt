@@ -8,7 +8,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../dependencies.cmake)
 
-add_executable(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.cpp)
+add_library (imgui_demo_wrapper imgui_demo_wrapper.h imgui_demo_wrapper.cpp)
+target_link_libraries(imgui_demo_wrapper juangui_wrapper)
+
+add_executable(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.cpp
+                 )
 
 if (WIN32)
     target_link_libraries(${CMAKE_PROJECT_NAME}
@@ -16,6 +20,7 @@ if (WIN32)
                             implot
                             glfw
                             OpenGL::GL
+                            imgui_demo_wrapper
                             )
 endif()
 
@@ -25,6 +30,7 @@ if(UNIX AND NOT APPLE)
                             imgui
                             implot
                             glfw
+                            imgui_demo_wrapper
                             OpenGL::GL)
 endif()
 
@@ -32,6 +38,7 @@ if(APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME}
                             imgui
                             glfw
+                            imgui_demo_wrapper
                             "-framework Cocoa"
                             "-framework OpenGL"
                             "-framework IOKit")
