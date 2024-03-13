@@ -11,6 +11,71 @@ JuanGui_Wrapper::JuanGui_Wrapper(const int& width,
                                  const double& font_size)
 {
 
+    std::string screen_mode;
+    if (mode == JuanGui_Wrapper::SCREEN_MODE::DARK_MODE)
+    {
+        screen_mode = "DARK_MODE";
+    }else{
+        screen_mode = "LIGHT_MODE";
+    }
+    std::string font_path = std::string("../../fonts/Ubuntu/Ubuntu-Regular.ttf");
+
+    _start_settings(width, height, title, screen_mode, font_path, font_size);
+}
+
+JuanGui_Wrapper::JuanGui_Wrapper(const juangui_wrapper_parameters &parameters)
+{
+   _start_settings(parameters.width,
+                    parameters.height,
+                    parameters.title,
+                    parameters.screen_mode,
+                    parameters.font_path,
+                    parameters.font_size);
+}
+
+
+// Simple helper function to load an image into a OpenGL texture with common settings
+bool JuanGui_Wrapper::LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
+{
+    // Load from file
+    int image_width = 0;
+    int image_height = 0;
+    unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
+    if (image_data == NULL)
+        return false;
+
+    // Create a OpenGL texture identifier
+    GLuint image_texture;
+    glGenTextures(1, &image_texture);
+    glBindTexture(GL_TEXTURE_2D, image_texture);
+
+    // Setup filtering parameters for display
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // This is required on WebGL for non power-of-two textures
+    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); // Same
+
+// Upload pixels into texture
+#if defined(GL_UNPACK_ROW_LENGTH) && !defined(__EMSCRIPTEN__)
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+#endif
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
+    stbi_image_free(image_data);
+
+    *out_texture = image_texture;
+    *out_width = image_width;
+    *out_height = image_height;
+
+    return true;
+}
+
+void JuanGui_Wrapper::_start_settings(const int &width,
+                                      const int &height,
+                                      const std::string &title,
+                                      const std::string &screen_mode,
+                                      const std::string &font_path,
+                                      const double &font_size)
+{
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
         throw std::runtime_error("Error in glfwInit()");
@@ -57,14 +122,14 @@ JuanGui_Wrapper::JuanGui_Wrapper(const int& width,
 
 
 
-    set_screen_mode(mode);
+    set_screen_mode(screen_mode);
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window_, true);
-    #ifdef __EMSCRIPTEN__
-        ImGui_ImplGlfw_InstallEmscriptenCanvasResizeCallback("#canvas");
-    #endif
-        ImGui_ImplOpenGL3_Init(glsl_version);
+#ifdef __EMSCRIPTEN__
+    ImGui_ImplGlfw_InstallEmscriptenCanvasResizeCallback("#canvas");
+#endif
+    ImGui_ImplOpenGL3_Init(glsl_version);
 
     // Load Fonts
     // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
@@ -86,53 +151,18 @@ JuanGui_Wrapper::JuanGui_Wrapper(const int& width,
 
     //IM_ASSERT(font != nullptr);
     // Our state
-    if (font == JuanGui_Wrapper::FONT::UBUNTU)
-    {
-        try {
-            io.Fonts->AddFontFromFileTTF("../../fonts/Ubuntu/Ubuntu-Regular.ttf", font_size);
-        } catch (std::exception& e) {
-            std::cout<<e.what()<<std::endl;
-        }
-    }else{
+
+
+    // This is not working!
+    try {
+        io.Fonts->AddFontFromFileTTF(font_path.c_str(), static_cast<float>(font_size));
+
+    } catch (std::exception& e) {
         io.Fonts->AddFontDefault();
     }
 
-}
 
 
-// Simple helper function to load an image into a OpenGL texture with common settings
-bool JuanGui_Wrapper::LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
-{
-    // Load from file
-    int image_width = 0;
-    int image_height = 0;
-    unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
-    if (image_data == NULL)
-        return false;
-
-    // Create a OpenGL texture identifier
-    GLuint image_texture;
-    glGenTextures(1, &image_texture);
-    glBindTexture(GL_TEXTURE_2D, image_texture);
-
-    // Setup filtering parameters for display
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // This is required on WebGL for non power-of-two textures
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); // Same
-
-// Upload pixels into texture
-#if defined(GL_UNPACK_ROW_LENGTH) && !defined(__EMSCRIPTEN__)
-    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-#endif
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
-    stbi_image_free(image_data);
-
-    *out_texture = image_texture;
-    *out_width = image_width;
-    *out_height = image_height;
-
-    return true;
 }
 
 void JuanGui_Wrapper::cleanup()
@@ -229,6 +259,19 @@ void JuanGui_Wrapper::set_screen_mode(const SCREEN_MODE& mode)
     else
         ImGui::StyleColorsLight();
 
+}
+
+void JuanGui_Wrapper::set_screen_mode(const std::string &screen_mode)
+{
+    if (screen_mode == "DARK_MODE"){
+        ImGui::StyleColorsDark();
+    }else if (screen_mode == "LIGHT_MODE")
+    {
+        ImGui::StyleColorsLight();
+    }else
+    {
+        throw std::runtime_error("Wrong screen mode. Use DARK_MODE or LIGHT_MODE");
+    }
 }
 
 GLFWwindow *JuanGui_Wrapper::get_glfw_ptr()
