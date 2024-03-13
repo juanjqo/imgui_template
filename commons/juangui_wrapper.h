@@ -26,7 +26,7 @@ public:
                     const int& height,
                     const std::string& title,
                     const JuanGui_Wrapper::SCREEN_MODE& mode = JuanGui_Wrapper::SCREEN_MODE::LIGHT_MODE,
-                    const JuanGui_Wrapper::FONT& font = JuanGui_Wrapper::FONT::UBUNTU,
+                    const JuanGui_Wrapper::FONT& font = JuanGui_Wrapper::FONT::DEFAULT,
                     const double& font_size = 18.0);
     JuanGui_Wrapper() = delete;
     JuanGui_Wrapper(const JuanGui_Wrapper&) = delete;
@@ -41,6 +41,8 @@ public:
     void set_screen_mode(const JuanGui_Wrapper::SCREEN_MODE& mode);
     void gui();
     void loop();
+
+    void select_font(const std::string font_path, const int& font_size);
 
 
 

@@ -7,7 +7,7 @@ JuanGui_Wrapper::JuanGui_Wrapper(const int& width,
                                  const int& height,
                                  const std::string& title,
                                  const JuanGui_Wrapper::SCREEN_MODE& mode ,
-                                 const JuanGui_Wrapper::FONT& font ,
+                                 const JuanGui_Wrapper::FONT& font,
                                  const double& font_size)
 {
 
@@ -88,7 +88,11 @@ JuanGui_Wrapper::JuanGui_Wrapper(const int& width,
     // Our state
     if (font == JuanGui_Wrapper::FONT::UBUNTU)
     {
-        io.Fonts->AddFontFromFileTTF("../../fonts/Ubuntu/Ubuntu-Regular.ttf", 18.0f);
+        try {
+            io.Fonts->AddFontFromFileTTF("../../fonts/Ubuntu/Ubuntu-Regular.ttf", font_size);
+        } catch (std::exception& e) {
+            std::cout<<e.what()<<std::endl;
+        }
     }else{
         io.Fonts->AddFontDefault();
     }
@@ -193,6 +197,7 @@ void JuanGui_Wrapper::loop()
     EMSCRIPTEN_MAINLOOP_END;
 #endif
 }
+
 
 
 
