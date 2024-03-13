@@ -155,6 +155,7 @@ if(UNIX AND NOT APPLE)
     target_link_libraries(juangui_wrapper
         imgui
         implot
+        imgui-knobs
         glfw
         OpenGL::GL)
 
