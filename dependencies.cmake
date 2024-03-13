@@ -9,6 +9,7 @@ set (IMGUI_DIR  ${IMGUI_TEMPLATE_DIR}/submodules/imgui)
 set (IMPLOT_DIR ${IMGUI_TEMPLATE_DIR}/submodules/implot)
 set (COMMONS_DIR ${IMGUI_TEMPLATE_DIR}/commons)
 set (STB_DIRS    ${IMGUI_TEMPLATE_DIR}/submodules/stb)
+set (IMGUI_KNOBS ${IMGUI_TEMPLATE_DIR}/submodules/imgui-knobs)
 
 if (WIN32)
     # GLFW
@@ -102,6 +103,7 @@ include_directories(${IMGUI_DIR}/backends)
 include_directories(${IMPLOT_DIR})
 include_directories(${COMMONS_DIR})
 include_directories(${STB_DIRS})
+include_directories(${IMGUI_KNOBS})
 
 
 set(IMGUI_HEADERS
@@ -139,6 +141,11 @@ set(IMPLOT_SRC
     ${IMPLOT_DIR}/implot_demo.cpp
 )
 
+add_library(imgui-knobs
+    ${IMGUI_KNOBS}/imgui-knobs.h
+    ${IMGUI_KNOBS}/imgui-knobs.cpp
+)
+
 
 add_library(imgui ${IMGUI_HEADERS} ${IMGUI_SRC})
 add_library(implot ${IMPLOT_HEADERS} ${IMPLOT_SRC})
@@ -150,6 +157,10 @@ if(UNIX AND NOT APPLE)
         implot
         glfw
         OpenGL::GL)
+
+    target_link_libraries(imgui-knobs
+        imgui
+    )
 endif()
 
 

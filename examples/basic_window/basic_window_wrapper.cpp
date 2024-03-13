@@ -43,6 +43,11 @@ void Basic_Window_Wrapper::my_custom_gui()
         ImGui::Text("counter = %d", counter);
 
         //ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+        static float value = 0;
+
+        if (ImGuiKnobs::Knob("Volume", &value, -6.0f, 6.0f, 0.1f, "%.1fdB", ImGuiKnobVariant_Tick)) {
+            // value was changed
+        }
         ImGui::End();
     }
 

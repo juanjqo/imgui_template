@@ -21,6 +21,7 @@ if (WIN32)
     target_link_libraries(${CMAKE_PROJECT_NAME}
                             imgui
                             implot
+                            imgui-knobs
                             glfw
                             OpenGL::GL
                             ${CUSTOM_JUANGUI_WRAPPER}
@@ -31,6 +32,7 @@ if(UNIX AND NOT APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME}
                             imgui
                             implot
+                            imgui-knobs
                             glfw
                             OpenGL::GL
                             ${CUSTOM_JUANGUI_WRAPPER})
@@ -40,6 +42,7 @@ if(APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME}
                             imgui
                             implot
+                            imgui-knobs
                             ${CUSTOM_JUANGUI_WRAPPER}
                             glfw
                             "-framework Cocoa"
