@@ -86,7 +86,12 @@ JuanGui_Wrapper::JuanGui_Wrapper(const int& width,
 
     //IM_ASSERT(font != nullptr);
     // Our state
-    io.Fonts->AddFontFromFileTTF("../../fonts/Ubuntu/Ubuntu-Regular.ttf", 18.0f);
+    if (font == JuanGui_Wrapper::FONT::UBUNTU)
+    {
+        io.Fonts->AddFontFromFileTTF("../../fonts/Ubuntu/Ubuntu-Regular.ttf", 18.0f);
+    }else{
+        io.Fonts->AddFontDefault();
+    }
 
 }
 
