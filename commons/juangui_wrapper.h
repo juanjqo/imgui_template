@@ -1,6 +1,7 @@
 #pragma once
 #include <my_imgui_definitions.h>
-
+#include <memory>
+#include<my_imgui_definitions.h>
 #include <string>
 #include <iostream>
 
