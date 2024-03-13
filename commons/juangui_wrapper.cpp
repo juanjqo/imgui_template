@@ -270,7 +270,11 @@ void JuanGui_Wrapper::set_screen_mode(const std::string &screen_mode)
         ImGui::StyleColorsLight();
     }else
     {
-        throw std::runtime_error("Wrong screen mode. Use DARK_MODE or LIGHT_MODE");
+        //throw std::runtime_error("Wrong screen mode. Use DARK_MODE or LIGHT_MODE");
+        std::cerr<<"Wrong screen mode. Use DARK_MODE or LIGHT_MODE"<<std::endl;
+        std::cerr<<"LIGHT_MODE was selected instead!"<<std::endl;
+        ImGui::StyleColorsLight();
+        //throw std::invalid_argument( "received negative value" );
     }
 }
 
