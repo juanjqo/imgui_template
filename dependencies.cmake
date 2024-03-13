@@ -26,7 +26,7 @@ if (WIN32)
             )
 
     # GLFW
-    set(GLFW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/glfw) # Set this to point to an up-to-date GLFW repo
+    set(GLFW_DIR ${IMGUI_TEMPLATE_DIR}/submodules/glfw) # Set this to point to an up-to-date GLFW repo
     option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
     option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
     option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
@@ -57,7 +57,7 @@ if(UNIX AND NOT APPLE)
     ADD_COMPILE_OPTIONS(-Werror=return-type -Wall -Wextra -Wmissing-declarations -Wredundant-decls -Woverloaded-virtual)
 
     # GLFW
-    set(GLFW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/glfw) # Set this to point to an up-to-date GLFW repo
+    set(GLFW_DIR ${IMGUI_TEMPLATE_DIR}/submodules/glfw) # Set this to point to an up-to-date GLFW repo
     option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
     option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
     option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
