@@ -5,10 +5,10 @@ if (WIN32)
 endif()
 
 
-set (IMGUI_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/imgui)
-set (IMPLOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/implot)
-set (COMMONS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../commons)
-set (STB_DIRS    ${CMAKE_CURRENT_SOURCE_DIR}/../../submodules/stb)
+set (IMGUI_DIR  ${IMGUI_TEMPLATE_DIR}/submodules/imgui)
+set (IMPLOT_DIR ${IMGUI_TEMPLATE_DIR}/submodules/implot)
+set (COMMONS_DIR ${IMGUI_TEMPLATE_DIR}/commons)
+set (STB_DIRS    ${IMGUI_TEMPLATE_DIR}/submodules/stb)
 
 if (WIN32)
     # GLFW

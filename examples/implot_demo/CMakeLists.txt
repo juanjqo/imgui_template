@@ -7,7 +7,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../dependencies.cmake)
+set(IMGUI_TEMPLATE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../.././../imgui_template/)
+include(${IMGUI_TEMPLATE_DIR}/dependencies.cmake)
 
 add_library (implot_demo_wrapper implot_demo_wrapper.h implot_demo_wrapper.cpp)
 target_link_libraries(implot_demo_wrapper juangui_wrapper)
