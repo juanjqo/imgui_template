@@ -13,6 +13,12 @@ Basic_Window_Wrapper::Basic_Window_Wrapper(const int& width,
 
 }
 
+Basic_Window_Wrapper::Basic_Window_Wrapper(const juangui_wrapper_parameters &parameters)
+    :JuanGui_Wrapper(parameters)
+{
+
+}
+
 
 
 void Basic_Window_Wrapper::my_custom_gui()

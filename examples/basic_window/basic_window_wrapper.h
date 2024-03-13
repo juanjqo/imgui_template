@@ -13,6 +13,8 @@ public:
                          const JuanGui_Wrapper::FONT& font = JuanGui_Wrapper::FONT::UBUNTU,
                          const double& font_size = 18.0);
 
+    Basic_Window_Wrapper(const juangui_wrapper_parameters& parameters);
+
 
     void my_custom_gui() override;
 };
