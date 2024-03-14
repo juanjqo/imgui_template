@@ -4,8 +4,14 @@
 int main(int, char**)
 {
 
-
-    Imgui_Demo_Wrapper imgui_demo_wrapper(1280, 720, "Juanchotronics", JuanGui_Wrapper::SCREEN_MODE::LIGHT_MODE);
+    juangui_wrapper_parameters parameters;
+    parameters.width = 1280;
+    parameters.height = 720;
+    parameters.title = "Juanchotronics";
+    parameters.screen_mode = "LIGHT_MODE";
+    parameters.font_path = "../../../imgui_template/fonts/Ubuntu/Ubuntu-Regular.ttf";
+    parameters.font_size = 18;
+    Imgui_Demo_Wrapper imgui_demo_wrapper(parameters);
 
 
     imgui_demo_wrapper.loop();

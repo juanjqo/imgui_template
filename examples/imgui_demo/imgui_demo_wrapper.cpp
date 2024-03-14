@@ -2,8 +2,8 @@
 
 
 
-Imgui_Demo_Wrapper::Imgui_Demo_Wrapper(const int &width, const int &height, const std::string &title, const SCREEN_MODE &mode, const FONT &font, const double &font_size)
-:JuanGui_Wrapper(width, height, title, mode, font, font_size)
+Imgui_Demo_Wrapper::Imgui_Demo_Wrapper(const juangui_wrapper_parameters &parameters)
+:JuanGui_Wrapper(parameters)
 {
 
 }

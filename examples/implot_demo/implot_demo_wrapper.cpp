@@ -1,11 +1,9 @@
 #include "implot_demo_wrapper.h"
 
-
-
-Implot_Demo_Wrapper::Implot_Demo_Wrapper(const int &width, const int &height, const std::string &title, const SCREEN_MODE &mode, const FONT &font, const double &font_size)
-:JuanGui_Wrapper(width, height, title, mode, font, font_size)
+Implot_Demo_Wrapper::Implot_Demo_Wrapper(const juangui_wrapper_parameters &parameters)
+    :JuanGui_Wrapper(parameters)
 {
-  ImPlot::CreateContext();
+
 }
 
 void Implot_Demo_Wrapper::my_custom_gui()

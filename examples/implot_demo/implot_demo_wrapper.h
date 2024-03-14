@@ -4,12 +4,8 @@
 class Implot_Demo_Wrapper: public JuanGui_Wrapper
 {
 public:
-    Implot_Demo_Wrapper(const int& width,
-                        const int& height,
-                        const std::string& title,
-                        const JuanGui_Wrapper::SCREEN_MODE& mode = JuanGui_Wrapper::SCREEN_MODE::LIGHT_MODE,
-                        const JuanGui_Wrapper::FONT& font = JuanGui_Wrapper::FONT::UBUNTU,
-                        const double& font_size = 18.0);
+
+    Implot_Demo_Wrapper(const juangui_wrapper_parameters& parameters);
 
     void my_custom_gui() override;
 };
