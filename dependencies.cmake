@@ -146,6 +146,10 @@ add_library(imgui-knobs
     ${IMGUI_KNOBS}/imgui-knobs.cpp
 )
 
+add_library(juancho-tools
+    ${COMMONS_DIR}/juancho_tools.h
+    ${COMMONS_DIR}/juancho_tools.cpp)
+
 
 add_library(imgui ${IMGUI_HEADERS} ${IMGUI_SRC})
 add_library(implot ${IMPLOT_HEADERS} ${IMPLOT_SRC})
