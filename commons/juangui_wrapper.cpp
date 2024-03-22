@@ -228,6 +228,9 @@ void JuanGui_Wrapper::loop()
 #ifdef __EMSCRIPTEN__
     EMSCRIPTEN_MAINLOOP_END;
 #endif
+
+
+    cleanup();
 }
 
 

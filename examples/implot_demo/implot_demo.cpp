@@ -15,7 +15,5 @@ int main(int, char**)
 
 
     implot_demo_wrapper.loop();
-
-    implot_demo_wrapper.cleanup();
     return 0;
 }

@@ -15,7 +15,5 @@ int main(int, char**)
 
 
     imgui_demo_wrapper.loop();
-
-   imgui_demo_wrapper.cleanup();
     return 0;
 }

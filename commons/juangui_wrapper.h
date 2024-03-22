@@ -35,6 +35,9 @@ protected:
                          const double& font_size
                          );
 
+    void cleanup();
+    void render();
+
 public:
     enum class SCREEN_MODE{DARK_MODE, LIGHT_MODE};
     enum class FONT{DEFAULT, UBUNTU};
@@ -55,8 +58,7 @@ public:
     GLFWwindow* get_glfw_ptr();
     void check_error_callback();
 
-    void cleanup();
-    void render();
+
     bool window_should_close();
     void set_screen_mode(const JuanGui_Wrapper::SCREEN_MODE& mode);
     void set_screen_mode(const std::string& screen_mode);
