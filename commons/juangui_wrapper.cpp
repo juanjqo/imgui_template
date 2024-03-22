@@ -1,5 +1,7 @@
 #include "juangui_wrapper.h"
 
+#include "my_imgui_custom_definitions.h"
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -152,15 +154,31 @@ void JuanGui_Wrapper::_start_settings(const int &width,
 
     //IM_ASSERT(font != nullptr);
     // Our state
+    std::string default_font_path = font_path;
+    bool status_font_path = std::filesystem::exists(font_path);
+
+    if (status_font_path == false or font_path == std::string("default"))
+    {
+        default_font_path = get_imgui_template_path() + std::string("fonts/Ubuntu/Ubuntu-Regular.ttf");
+        //std::cout<<"default_font: "<<default_font_path<<std::endl;
+        io.Fonts->AddFontFromFileTTF(default_font_path.c_str(), static_cast<float>(font_size));
+
+        if (font_path != std::string("default"))
+            std::cerr<<"Your custom font was not found. Ubuntu font is used by default. "<<std::endl;
+    }else{
+        io.Fonts->AddFontFromFileTTF(default_font_path.c_str(), static_cast<float>(font_size));
+    }
 
 
     // This is not working!
+    /*
     try {
         io.Fonts->AddFontFromFileTTF(font_path.c_str(), static_cast<float>(font_size));
 
     } catch (std::exception& e) {
         io.Fonts->AddFontDefault();
     }
+*/
 
 
 

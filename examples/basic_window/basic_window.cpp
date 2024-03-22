@@ -8,7 +8,8 @@ int main(int, char**)
     parameters.height = 720;
     parameters.title = "Juanchotronics";
     parameters.screen_mode = "LIGHT_MODE";
-    parameters.font_path = "../../../imgui_template/fonts/Ubuntu/Ubuntu-Regular.ttf";
+    //parameters.font_path = "../../../imgui_template/fonts/Ubuntu/Ubuntu-Regular.ttf"; //your custom font
+    parameters.font_path = "default";
     parameters.font_size = 18;
 
     Basic_Window_Wrapper basic_window_wrapper(parameters);

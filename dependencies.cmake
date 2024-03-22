@@ -168,4 +168,14 @@ if(UNIX AND NOT APPLE)
     )
 endif()
 
+#add_definitions( -DIMGUI_TEMPLATE_DIR=${IMGUI_TEMPLATE_DIR})
+
+set(IMGUI_TEMPLATE_DIR ${IMGUI_TEMPLATE_DIR})
+configure_file(${COMMONS_DIR}/my_imgui_custom_definitions.h.in
+               ${COMMONS_DIR}/my_imgui_custom_definitions.h)
+
+#include_directories(${COMMONS_DIR}/my_imgui_custom_definitions.h)
+
+
+
 
