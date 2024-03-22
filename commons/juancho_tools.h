@@ -17,6 +17,7 @@ class JuanchoTools
 {
 public:
     static std::vector<double> eigen_vector_to_stdvector(const VectorXd& v);
+    static VectorXd std_vector_to_eigen_vector(std::vector<double> &std_vector);
     static std::vector<double> linspace(const double& start, const double& end, const int& size);
 };
 

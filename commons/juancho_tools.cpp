@@ -9,6 +9,11 @@ std::vector<double> JuanchoTools::eigen_vector_to_stdvector(const VectorXd& v)
     return vec;
 }
 
+Eigen::VectorXd JuanchoTools::std_vector_to_eigen_vector(std::vector<double> &std_vector)
+{
+    return Eigen::Map<VectorXd>(std_vector.data(), std_vector.size());
+}
+
 std::vector<double> JuanchoTools::linspace(const double &start, const double &end, const int &size)
 {
 
