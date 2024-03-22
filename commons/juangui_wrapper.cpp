@@ -159,7 +159,7 @@ void JuanGui_Wrapper::_start_settings(const int &width,
 
     if (status_font_path == false or font_path == std::string("default"))
     {
-        default_font_path = get_imgui_template_path() + std::string("fonts/Ubuntu/Ubuntu-Regular.ttf");
+        default_font_path = get_imgui_template_path() + std::string("/fonts/Ubuntu/Ubuntu-Regular.ttf");
         //std::cout<<"default_font: "<<default_font_path<<std::endl;
         io.Fonts->AddFontFromFileTTF(default_font_path.c_str(), static_cast<float>(font_size));
 
