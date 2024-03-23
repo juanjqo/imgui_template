@@ -59,7 +59,7 @@ public:
 
     GLFWwindow* get_glfw_ptr();
     void check_error_callback();
-    void set_main_loop_flag(const bool& break_main_loop_flag);
+    void stop_and_quit(const bool& break_main_loop_flag);
 
 
     bool window_should_close();

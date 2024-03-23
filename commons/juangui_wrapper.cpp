@@ -251,7 +251,7 @@ void JuanGui_Wrapper::loop()
     cleanup();
 }
 
-void JuanGui_Wrapper::set_main_loop_flag(const bool& break_main_loop_flag)
+void JuanGui_Wrapper::stop_and_quit(const bool& break_main_loop_flag)
 {
     break_main_loop_flag_ = break_main_loop_flag;
 }
