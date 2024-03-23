@@ -38,6 +38,7 @@ protected:
 
     void cleanup();
     void render();
+    bool break_main_loop_flag_ = false;
 
 public:
     enum class SCREEN_MODE{DARK_MODE, LIGHT_MODE};
@@ -58,6 +59,7 @@ public:
 
     GLFWwindow* get_glfw_ptr();
     void check_error_callback();
+    void set_main_loop_flag(const bool& break_main_loop_flag);
 
 
     bool window_should_close();

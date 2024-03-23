@@ -238,7 +238,7 @@ void JuanGui_Wrapper::loop()
     io.IniFilename = nullptr;
     EMSCRIPTEN_MAINLOOP_BEGIN
 #else
-    while (!window_should_close())
+    while (!window_should_close() and !break_main_loop_flag_)
 #endif
     {
         gui();
@@ -251,7 +251,10 @@ void JuanGui_Wrapper::loop()
     cleanup();
 }
 
-
+void JuanGui_Wrapper::set_main_loop_flag(const bool& break_main_loop_flag)
+{
+    break_main_loop_flag_ = break_main_loop_flag;
+}
 
 
 
