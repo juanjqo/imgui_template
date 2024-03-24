@@ -1,17 +1,7 @@
 #pragma once
-#include <iostream>
+#include <string>
 
-/*
-
-// define your version_libinterface
-#define VERSION_LIBINTERFACE @LIBINTERFACE_VERSION@
-
-// alternatively you could add your global method getLibInterfaceVersion here
-unsigned int getLibInterfaceVersion()
-{
-    return @LIBINTERFACE_VERSION@;
-}
-*/
+std::string get_imgui_template_path();
 
 std::string get_imgui_template_path()
 {
