@@ -36,27 +36,18 @@ protected:
                          const double& font_size
                          );
 
+    enum class SCREEN_MODE{DARK_MODE, LIGHT_MODE};
+
     void cleanup();
     void render();
     bool break_main_loop_flag_ = false;
-
-    enum class SCREEN_MODE{DARK_MODE, LIGHT_MODE};
-    enum class FONT{DEFAULT, UBUNTU};
-
-    [[deprecated("Use JuanGui_Wrapper(const juangui_wrapper_parameters& parameters) instead.")]]
-    JuanGui_Wrapper(const int& width,
-                    const int& height,
-                    const std::string& title,
-                    const JuanGui_Wrapper::SCREEN_MODE& mode = JuanGui_Wrapper::SCREEN_MODE::LIGHT_MODE,
-                    const JuanGui_Wrapper::FONT& font = JuanGui_Wrapper::FONT::DEFAULT,
-                    const double& font_size = 18.0);
 
     JuanGui_Wrapper(const juangui_wrapper_parameters& parameters);
     JuanGui_Wrapper() = delete;
     JuanGui_Wrapper(const JuanGui_Wrapper&) = delete;
     JuanGui_Wrapper& operator= (const JuanGui_Wrapper&) = delete;
 
-    GLFWwindow* get_glfw_ptr();
+
 
 
     void check_error_callback();
@@ -68,7 +59,9 @@ protected:
     void select_font(const std::string font_path, const int& font_size);
     void stop_and_quit(const bool& break_main_loop_flag);
 
+
 public:
+
     void loop();
     virtual void my_custom_gui() = 0;
 };

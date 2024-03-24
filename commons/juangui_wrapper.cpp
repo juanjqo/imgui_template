@@ -5,25 +5,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-JuanGui_Wrapper::JuanGui_Wrapper(const int& width,
-                                 const int& height,
-                                 const std::string& title,
-                                 const JuanGui_Wrapper::SCREEN_MODE& mode ,
-                                 const JuanGui_Wrapper::FONT& font,
-                                 const double& font_size)
-{
 
-    std::string screen_mode;
-    if (mode == JuanGui_Wrapper::SCREEN_MODE::DARK_MODE)
-    {
-        screen_mode = "DARK_MODE";
-    }else{
-        screen_mode = "LIGHT_MODE";
-    }
-    std::string font_path = std::string("../../fonts/Ubuntu/Ubuntu-Regular.ttf");
-
-    _start_settings(width, height, title, screen_mode, font_path, font_size);
-}
 
 JuanGui_Wrapper::JuanGui_Wrapper(const juangui_wrapper_parameters &parameters)
 {
@@ -304,9 +286,6 @@ void JuanGui_Wrapper::set_screen_mode(const std::string &screen_mode)
     }
 }
 
-GLFWwindow *JuanGui_Wrapper::get_glfw_ptr()
-{
-    return window_;
-}
+
 
 
