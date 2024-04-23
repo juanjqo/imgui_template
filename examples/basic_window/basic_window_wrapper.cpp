@@ -1,18 +1,6 @@
 #include "basic_window_wrapper.h"
 
 
-
-Basic_Window_Wrapper::Basic_Window_Wrapper(const int& width,
-                                            const int& height,
-                                            const std::string& title,
-                                            const JuanGui_Wrapper::SCREEN_MODE& mode,
-                                            const JuanGui_Wrapper::FONT& font,
-                                           const double& font_size)
-    :JuanGui_Wrapper(width, height, title, mode, font, font_size)
-{
-
-}
-
 Basic_Window_Wrapper::Basic_Window_Wrapper(const juangui_wrapper_parameters &parameters)
     :JuanGui_Wrapper(parameters)
 {
