@@ -77,7 +77,7 @@ void HarryPlotter::add_points(const float &x, const VectorXd &q)
 
 void HarryPlotter::plot_data(const std::string &name, const float &time, const std::vector<std::string> tags,
                              const float &history,
-                             const std::vector<std::tuple<float, float> > yaxis_limits,
+                             const std::tuple<float, float> yaxis_limits,
                              const ImPlotAxisFlags &flags)
 {
     float yaxis_min;
@@ -97,11 +97,10 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
             myoffset = offset_;
             ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL,0.5f);
         }
-
+        std::tie(yaxis_min, yaxis_max) = yaxis_limits;
+        ImPlot::SetupAxisLimits(ImAxis_Y1,yaxis_min ,yaxis_max, ImGuiCond_Always );
         for (int i=0; i<size_of_points_; i++)
         {
-            std::tie(yaxis_min, yaxis_max) = yaxis_limits.at(i);
-            ImPlot::SetupAxisLimits(ImAxis_Y1,yaxis_min ,yaxis_max, ImGuiCond_Always );
             ImPlot::PlotLine(tags.at(i).c_str(),
                              &data_.at(i)[0].x,
                              &data_.at(i)[0].y,
