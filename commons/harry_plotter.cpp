@@ -27,7 +27,7 @@ HarryPlotter::HarryPlotter(const int& size_of_points, const TYPE &type,
  * @param x
  * @param y
  */
-void HarryPlotter::add_point(const int &index_point, const float &x, const float &y)
+void HarryPlotter::add_point(const float& x, const float& y, const int& index_point)
 {
     if (index_point > size_of_points_)
     {
@@ -78,8 +78,7 @@ void HarryPlotter::add_points(const float &x, const VectorXd &q)
 void HarryPlotter::plot_data(const std::string &name, const float &time, const std::vector<std::string> tags,
                              const float &history,
                              const std::tuple<float, float> yaxis_limits,
-                             const ImPlotAxisFlags &flags,
-                             const TYPE &type)
+                             const ImPlotAxisFlags &flags)
 {
     float yaxis_min;
     float yaxis_max;
@@ -87,7 +86,7 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
     int myoffset;
     if (ImPlot::BeginPlot(name.c_str(), ImVec2(-1,150))) {
         ImPlot::SetupAxes(nullptr, nullptr, flags, flags);
-        if (type == TYPE::STATIC_BACKGROUND)
+        if (!dynamic_background_)
         {
             ImPlot::SetupAxisLimits(ImAxis_X1,0,history, ImGuiCond_Always);
             myoffset = 0;
@@ -108,8 +107,6 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
                              data_.at(i).size(),
                              0, myoffset, 2 * sizeof(float));
         }
-        //ImPlot::PlotLine("Mouse Y", &sdata2.Data[0].x, &sdata2.Data[0].y,
-//sdata2.Data.size(), 0, sdata2.Offset, 2*sizeof(float));
 
         ImPlot::EndPlot();
     }

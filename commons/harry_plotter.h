@@ -32,16 +32,14 @@ public:
                  const int& max_size = 2000,
                  const float& span = 10.0f);
 
-    void add_point(const int& index_point,
-                   const float& x, const float& y);
+    void add_point(const float& x, const float& y,const int& index_point=0);
     void add_points(const float& x, const VectorXd& q);
     void plot_data(const std::string& name,
                    const float& time,
                    const std::vector<std::string> tags,
                    const float& history,
                    const std::tuple<float, float> yaxis_limits,
-                   const ImPlotAxisFlags& flags,
-                   const TYPE& type);
+                   const ImPlotAxisFlags& flags);
 };
 
 
