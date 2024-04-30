@@ -53,8 +53,14 @@ void HarryPlotter::add_point(const float& x, const float& y, const int& index_po
                 std::cout<<"offset: "<<offset_<<std::endl;
             }
             else {
-                data_.at(index_point)[offset_] = ImVec2(x,y);
+                for ( auto&v : data_)
+                {
+                    v[offset_] = ImVec2(x,y);
+                }
                 offset_ =  (offset_ + 1) % maxsize;
+                //data_.at(index_point)[offset_] = ImVec2(x,y);
+                //offset_ =  (offset_ + 1) % maxsize;
+
                 std::cout<<"offset: "<<offset_<<std::endl;
             }
         }
