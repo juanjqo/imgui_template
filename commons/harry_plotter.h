@@ -21,6 +21,21 @@ protected:
     int offset_;
     bool dynamic_background_ = false;
     int maxsize;
+    std::vector<std::string> tags_;
+    std::tuple<float, float> yaxis_limits_;
+    void _set_span(const float& span);
+
+    float vertical_plot_size_ = 150;
+
+    template<typename T>
+    void _check_size(const T& v)
+    {
+        if (v.size() != size_of_points_)
+        {
+            std::cerr<<"Wrong vector size. The vector must have a size of "<<size_of_points_<<std::endl;
+        }
+    }
+
 public:
     enum TYPE
     {
@@ -36,12 +51,13 @@ public:
     void add_points(const float& x, const VectorXd& q);
     void plot_data(const std::string& name,
                    const float& time,
-                   const std::vector<std::string> tags,
                    const float& history,
-                   const std::tuple<float, float> yaxis_limits,
-                   const ImPlotAxisFlags& flags);
+                   const ImPlotAxisFlags& flags = ImPlotAxisFlags_NoTickLabels);
 
-    void set_span(const float& span);
+    void set_tags(const std::vector<std::string> tags);
+    void set_yaxis(const std::tuple<float, float> yaxis_limits);
+    void set_vertical_plot_size(const float& size);
+
     void Erase();
 };
 

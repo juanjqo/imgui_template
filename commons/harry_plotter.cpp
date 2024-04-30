@@ -19,6 +19,7 @@ HarryPlotter::HarryPlotter(const int& size_of_points, const TYPE &type,
         dynamic_background_ = true;
         offset_  = 0;
     }
+    yaxis_limits_ = {-2*M_PI, 2*M_PI};
 }
 
 /**
@@ -61,36 +62,35 @@ void HarryPlotter::add_point(const float& x, const float& y, const int& index_po
  */
 void HarryPlotter::add_points(const float &x, const VectorXd &q)
 {
-    if (q.size() > size_of_points_)
+    _check_size(q.size());
+    for (int i=0; i<q.size();i++)
     {
-        std::cerr<<"The index point is higher than "<<size_of_points_<<std::endl;
+        add_point(x, q[i], i);
     }
-    else
-    {
-        for (int i=0; i<q.size();i++)
-        {
-            add_point(x, q[i], i);
-        }
-    }
+
 }
 
 
-void HarryPlotter::plot_data(const std::string &name, const float &time, const std::vector<std::string> tags,
+void HarryPlotter::plot_data(const std::string &name, const float &time,
                              const float &history,
-                             const std::tuple<float, float> yaxis_limits,
                              const ImPlotAxisFlags &flags)
 {
     float yaxis_min;
     float yaxis_max;
 
+    if (tags_.empty())
+    {
+        tags_ = std::vector<std::string>(size_of_points_, "");
+    }
+
     int myoffset;
-    if (ImPlot::BeginPlot(name.c_str(), ImVec2(-1,150))) {
+    if (ImPlot::BeginPlot(name.c_str(), ImVec2(-1, vertical_plot_size_))) {
         ImPlot::SetupAxes(nullptr, nullptr, flags, flags);
         if (!dynamic_background_)
         {
             ImPlot::SetupAxisLimits(ImAxis_X1,0,history, ImGuiCond_Always);
             myoffset = 0;
-            set_span(history);
+            _set_span(history);
         }
         else
         {
@@ -98,11 +98,11 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
             myoffset = offset_;
             //ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL,0.5f);
         }
-        std::tie(yaxis_min, yaxis_max) = yaxis_limits;
+        std::tie(yaxis_min, yaxis_max) = yaxis_limits_;
         ImPlot::SetupAxisLimits(ImAxis_Y1,yaxis_min ,yaxis_max, ImGuiCond_Always );
         for (int i=0; i<size_of_points_; i++)
         {
-            ImPlot::PlotLine(tags.at(i).c_str(),
+            ImPlot::PlotLine(tags_.at(i).c_str(),
                              &data_.at(i)[0].x,
                              &data_.at(i)[0].y,
                              data_.at(i).size(),
@@ -113,7 +113,23 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
     }
 }
 
-void HarryPlotter::set_span(const float &span)
+void HarryPlotter::set_tags(const std::vector<std::string> tags)
+{
+    _check_size(tags.size());
+    tags_ = tags;
+}
+
+void HarryPlotter::set_yaxis(const std::tuple<float, float> yaxis_limits)
+{
+    yaxis_limits_ = yaxis_limits;
+}
+
+void HarryPlotter::set_vertical_plot_size(const float &size)
+{
+    vertical_plot_size_ = size;
+}
+
+void HarryPlotter::_set_span(const float &span)
 {
     span_= span;
 }
