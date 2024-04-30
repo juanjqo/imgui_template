@@ -18,6 +18,8 @@ HarryPlotter::HarryPlotter(const int& size_of_points, const TYPE &type,
     {
         dynamic_background_ = true;
 
+    }else{
+        dynamic_background_ = false;
     }
     yaxis_limits_ = {-2*M_PI, 2*M_PI};
     offset_  = 0;
@@ -46,10 +48,14 @@ void HarryPlotter::add_point(const float& x, const float& y, const int& index_po
         }
         else{  //dynamic background
             if (data_.at(index_point).size() < maxsize)
+            {
                 data_.at(index_point).push_back(ImVec2(x,y));
+                std::cout<<"offset: "<<offset_<<std::endl;
+            }
             else {
                 data_.at(index_point)[offset_] = ImVec2(x,y);
                 offset_ =  (offset_ + 1) % maxsize;
+                std::cout<<"offset: "<<offset_<<std::endl;
             }
         }
     }
