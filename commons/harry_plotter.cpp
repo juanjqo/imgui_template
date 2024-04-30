@@ -111,3 +111,15 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
         ImPlot::EndPlot();
     }
 }
+
+void HarryPlotter::Erase()
+{
+    for ( auto&v : data_)
+    {
+    if (v.size() > 0) {
+        v.shrink(0);
+        offset_  = 0;
+    }
+    }
+
+}
