@@ -62,7 +62,7 @@ void HarryPlotter::add_point(const float& x, const float& y, const int& index_po
  */
 void HarryPlotter::add_points(const float &x, const VectorXd &q)
 {
-    _check_size(q.size());
+    _check_size(q);
     for (int i=0; i<q.size();i++)
     {
         add_point(x, q[i], i);
@@ -115,7 +115,7 @@ void HarryPlotter::plot_data(const std::string &name, const float &time,
 
 void HarryPlotter::set_tags(const std::vector<std::string> tags)
 {
-    _check_size(tags.size());
+    _check_size(tags);
     tags_ = tags;
 }
 
