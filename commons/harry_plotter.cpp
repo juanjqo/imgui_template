@@ -69,7 +69,7 @@ void HarryPlotter::add_points(const float &x, const VectorXd &q)
     {
         for (int i=0; i<q.size();i++)
         {
-            add_point(i, x, q[i]);
+            add_point(x, q[i], i);
         }
     }
 }
