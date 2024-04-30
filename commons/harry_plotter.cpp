@@ -50,7 +50,7 @@ void HarryPlotter::add_point(const float& x, const float& y, const int& index_po
             if (data_.at(index_point).size() < maxsize)
             {
                 data_.at(index_point).push_back(ImVec2(x,y));
-                std::cout<<"offset: "<<offset_<<std::endl;
+                std::cout<<"offset: --->"<<offset_<<std::endl;
             }
             else {
                 for ( auto&v : data_)
