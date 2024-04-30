@@ -150,6 +150,11 @@ add_library(juancho-tools
     ${COMMONS_DIR}/juancho_tools.h
     ${COMMONS_DIR}/juancho_tools.cpp)
 
+add_library(harry_plotter
+    ${COMMONS_DIR}/harry_plotter.h
+    ${COMMONS_DIR}/harry_plotter.cpp
+)
+
 
 add_library(imgui ${IMGUI_HEADERS} ${IMGUI_SRC})
 add_library(implot ${IMPLOT_HEADERS} ${IMPLOT_SRC})
@@ -164,7 +169,13 @@ if(UNIX AND NOT APPLE)
         OpenGL::GL)
 
     target_link_libraries(imgui-knobs
+        imgui)
+
+    target_link_libraries(harry_plotter
         imgui
+        implot
+        glfw
+        OpenGL::GL
     )
 endif()
 
