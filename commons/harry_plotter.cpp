@@ -17,9 +17,10 @@ HarryPlotter::HarryPlotter(const int& size_of_points, const TYPE &type,
     if (type == TYPE::DYNAMIC_BACKGROUND)
     {
         dynamic_background_ = true;
-        offset_  = 0;
+
     }
     yaxis_limits_ = {-2*M_PI, 2*M_PI};
+    offset_  = 0;
 }
 
 /**
@@ -83,30 +84,27 @@ void HarryPlotter::plot_data(const std::string &name, const float &time,
         tags_ = std::vector<std::string>(size_of_points_, "");
     }
 
-    int myoffset;
     if (ImPlot::BeginPlot(name.c_str(), ImVec2(-1, vertical_plot_size_))) {
         ImPlot::SetupAxes(nullptr, nullptr, flags, flags);
         if (!dynamic_background_)
         {
             ImPlot::SetupAxisLimits(ImAxis_X1,0,history, ImGuiCond_Always);
-            myoffset = 0;
             _set_span(history);
         }
         else
         {
             ImPlot::SetupAxisLimits(ImAxis_X1, time - history, time, ImGuiCond_Always);
-            myoffset = offset_;
             //ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL,0.5f);
         }
         std::tie(yaxis_min, yaxis_max) = yaxis_limits_;
-        ImPlot::SetupAxisLimits(ImAxis_Y1,yaxis_min ,yaxis_max, ImGuiCond_Always );
+        ImPlot::SetupAxisLimits(ImAxis_Y1,yaxis_min ,yaxis_max, ImGuiCond_Always);
         for (int i=0; i<size_of_points_; i++)
         {
             ImPlot::PlotLine(tags_.at(i).c_str(),
                              &data_.at(i)[0].x,
                              &data_.at(i)[0].y,
                              data_.at(i).size(),
-                             0, myoffset, 2 * sizeof(float));
+                             0, offset_, 2 * sizeof(float));
         }
 
         ImPlot::EndPlot();

@@ -47,7 +47,7 @@ public:
                  const int& max_size = 2000,
                  const float& span = 10.0f);
 
-    void add_point(const float& x, const float& y,const int& index_point=0);
+    void add_point (const float& x, const float& y, const int& index_point=0);
     void add_points(const float& x, const VectorXd& q);
     void plot_data(const std::string& name,
                    const float& time,
