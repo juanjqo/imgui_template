@@ -40,6 +40,7 @@ public:
                    const float& history,
                    const std::tuple<float, float> yaxis_limits,
                    const ImPlotAxisFlags& flags);
+    void Erase();
 };
 
 
