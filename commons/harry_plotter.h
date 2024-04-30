@@ -40,6 +40,8 @@ public:
                    const float& history,
                    const std::tuple<float, float> yaxis_limits,
                    const ImPlotAxisFlags& flags);
+
+    void set_span(const float& span);
     void Erase();
 };
 

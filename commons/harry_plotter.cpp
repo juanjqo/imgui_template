@@ -90,6 +90,7 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
         {
             ImPlot::SetupAxisLimits(ImAxis_X1,0,history, ImGuiCond_Always);
             myoffset = 0;
+            set_span(history);
         }
         else
         {
@@ -110,6 +111,11 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
 
         ImPlot::EndPlot();
     }
+}
+
+void HarryPlotter::set_span(const float &span)
+{
+    span_= span;
 }
 
 void HarryPlotter::Erase()
