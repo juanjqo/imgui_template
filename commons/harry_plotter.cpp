@@ -96,6 +96,7 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
         {
             ImPlot::SetupAxisLimits(ImAxis_X1, time - history, time, ImGuiCond_Always);
             myoffset = offset_;
+            ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL,0.5f);
         }
         ImPlot::SetupAxisLimits(ImAxis_Y1,yaxis_min ,yaxis_max, ImGuiCond_Always );
 
