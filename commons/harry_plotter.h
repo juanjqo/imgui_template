@@ -18,7 +18,8 @@ protected:
     float span_;
     std::vector<ImVector<ImVec2>> data_;
     int size_of_points_;
-    int offset_;
+    //int offset_;
+    std::vector<int> offsets_;
     bool dynamic_background_ = false;
     int maxsize;
     std::vector<std::string> tags_;
@@ -58,7 +59,7 @@ public:
     void set_yaxis(const std::tuple<float, float> yaxis_limits);
     void set_vertical_plot_size(const float& size);
 
-    void Erase();
+    //void Erase();
 };
 
 

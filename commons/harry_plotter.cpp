@@ -22,7 +22,8 @@ HarryPlotter::HarryPlotter(const int& size_of_points, const TYPE &type,
         dynamic_background_ = false;
     }
     yaxis_limits_ = {-2*M_PI, 2*M_PI};
-    offset_  = 0;
+    //offset_  = 0;
+    offsets_ = std::vector<int>(size_of_points, 0);
 }
 
 /**
@@ -52,8 +53,8 @@ void HarryPlotter::add_point(const float& x, const float& y, const int& index_po
                 data_.at(index_point).push_back(ImVec2(x,y));
             }
             else {
-                data_.at(index_point)[offset_] = ImVec2(x,y);
-                offset_ =  (offset_ + 1) % maxsize;
+                data_.at(index_point)[offsets_.at(index_point)] = ImVec2(x,y);
+                offsets_.at(index_point) =  (offsets_.at(index_point) + 1) % maxsize;
 
             }
         }
@@ -109,7 +110,7 @@ void HarryPlotter::plot_data(const std::string &name, const float &time,
                              &data_.at(i)[0].x,
                              &data_.at(i)[0].y,
                              data_.at(i).size(),
-                             0, offset_, 2 * sizeof(float));
+                             0, offsets_.at(i), 2 * sizeof(float));
         }
 
         ImPlot::EndPlot();
@@ -137,6 +138,7 @@ void HarryPlotter::_set_span(const float &span)
     span_= span;
 }
 
+/*
 void HarryPlotter::Erase()
 {
     for ( auto&v : data_)
@@ -147,4 +149,4 @@ void HarryPlotter::Erase()
     }
     }
 
-}
+}*/
