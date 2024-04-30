@@ -3,16 +3,21 @@
 
 
 
-HarryPlotter::HarryPlotter(const int& size_of_points,
+HarryPlotter::HarryPlotter(const int& size_of_points, const TYPE &type,
                            const int &max_size,
                            const float &span)
-    :span_(span),size_of_points_(size_of_points)
+    :span_(span),size_of_points_(size_of_points),maxsize(max_size)
 {
     ImVector<ImVec2> data;
     data_ = std::vector<ImVector<ImVec2>>(size_of_points, data);
     for (auto &element : data_)
     {
         element.reserve(max_size);
+    }
+    if (type == TYPE::DYNAMIC_BACKGROUND)
+    {
+        dynamic_background_ = true;
+        offset_  = 0;
     }
 }
 
@@ -30,10 +35,21 @@ void HarryPlotter::add_point(const int &index_point, const float &x, const float
     }
     else
     {
-        float xmod = fmodf(x, span_);
-        if (!data_[index_point].empty() && xmod < data_[index_point].back().x)
-            data_[index_point].shrink(0);
-        data_[index_point].push_back(ImVec2(xmod, y));
+        if (!dynamic_background_) //static background
+        {
+            float xmod = fmodf(x, span_);
+            if (!data_.at(index_point).empty() && xmod < data_.at(index_point).back().x)
+                data_.at(index_point).shrink(0);
+            data_[index_point].push_back(ImVec2(xmod, y));
+        }
+        else{  //dynamic background
+            if (data_.at(index_point).size() < maxsize)
+                data_.at(index_point).push_back(ImVec2(x,y));
+            else {
+                data_.at(index_point)[offset_] = ImVec2(x,y);
+                offset_ =  (offset_ + 1) % maxsize;
+            }
+        }
     }
 }
 
@@ -85,6 +101,8 @@ void HarryPlotter::plot_data(const std::string &name, const float &time, const s
                              data_.at(i).size(),
                              0, 0, 2 * sizeof(float));
         }
+        //ImPlot::PlotLine("Mouse Y", &sdata2.Data[0].x, &sdata2.Data[0].y,
+//sdata2.Data.size(), 0, sdata2.Offset, 2*sizeof(float));
 
         ImPlot::EndPlot();
     }

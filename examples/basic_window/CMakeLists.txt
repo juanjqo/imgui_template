@@ -22,6 +22,7 @@ if (WIN32)
                             imgui
                             implot
                             imgui-knobs
+                            harry_plotter
                             glfw
                             OpenGL::GL
                             ${CUSTOM_JUANGUI_WRAPPER}
@@ -33,6 +34,7 @@ if(UNIX AND NOT APPLE)
                             imgui
                             implot
                             imgui-knobs
+                            harry_plotter
                             glfw
                             OpenGL::GL
                             ${CUSTOM_JUANGUI_WRAPPER})
@@ -43,6 +45,7 @@ if(APPLE)
                             imgui
                             implot
                             imgui-knobs
+                            harry_plotter
                             ${CUSTOM_JUANGUI_WRAPPER}
                             glfw
                             "-framework Cocoa"

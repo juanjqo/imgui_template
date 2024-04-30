@@ -18,6 +18,9 @@ protected:
     float span_;
     std::vector<ImVector<ImVec2>> data_;
     int size_of_points_;
+    int offset_;
+    bool dynamic_background_ = false;
+    int maxsize;
 public:
     enum TYPE
     {
@@ -25,6 +28,7 @@ public:
         DYNAMIC_BACKGROUND,
     };
     HarryPlotter(const int& size_of_points = 1,
+                 const TYPE& type = TYPE::STATIC_BACKGROUND,
                  const int& max_size = 2000,
                  const float& span = 10.0f);
 
