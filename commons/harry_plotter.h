@@ -38,7 +38,7 @@ public:
                    const float& time,
                    const std::vector<std::string> tags,
                    const float& history,
-                   const std::tuple<float, float> yaxis_limits,
+                   const std::vector<std::tuple<float, float>> yaxis_limits,
                    const ImPlotAxisFlags& flags);
 };
 
