@@ -17,6 +17,8 @@ void Basic_Window_Wrapper::my_custom_gui()
         static float f = 0.0f;
         static int counter = 0;
 
+        set_next_window_position(50,50);
+
         ImGui::Begin("Hello, Juanchito!");                          // Create a window called "Hello, world!" and append into it.
 
         ImGui::Text("This is a basic example.");               // Display some text (you can use a format strings too)
@@ -47,6 +49,7 @@ void Basic_Window_Wrapper::my_custom_gui()
         bool ret = LoadTextureFromFile(std::string("../../../../images/example.jpg").c_str(), &my_image_texture, &my_image_width, &my_image_height);
         IM_ASSERT(ret);
 
+        set_next_window_position(400,50);
         ImGui::Begin("OpenGL Texture Text");
         //ImGui::Text("pointer = %x", my_image_texture);
         //ImGui::Text("size = %d x %d", my_image_width, my_image_height);

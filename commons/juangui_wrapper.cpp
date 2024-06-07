@@ -239,11 +239,19 @@ void JuanGui_Wrapper::stop_and_quit(const bool& break_main_loop_flag)
     break_main_loop_flag_ = break_main_loop_flag;
 }
 
+void JuanGui_Wrapper::remember_window_positions(const bool &remember_window_positions_flag)
+{
+    if (remember_window_positions_flag)
+        remember_window_positions_ = ImGuiCond_FirstUseEver;
+    else
+        remember_window_positions_ = ImGuiCond_Once;
+}
+
 void JuanGui_Wrapper::set_next_window_position(const int &x, const int &y)
 {
     ImGui::SetNextWindowPos(ImVec2( ImGui::GetMainViewport()->WorkPos.x + x,
                             ImGui::GetMainViewport()->WorkPos.y + y),
-                            ImGuiCond_Once); // ImGuiCond_Once ImGuiCond_FirstUseEver
+                            remember_window_positions_); // ImGuiCond_Once ImGuiCond_FirstUseEver
 }
 
 void JuanGui_Wrapper::set_next_window_size(const int &width, const int &height)

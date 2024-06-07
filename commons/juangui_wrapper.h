@@ -57,6 +57,7 @@ protected:
     void select_font(const std::string font_path, const int& font_size);
     void stop_and_quit(const bool& break_main_loop_flag);
 
+    ImGuiCond_ remember_window_positions_ = ImGuiCond_Once;
     void set_next_window_position(const int& x, const int& y);
     void set_next_window_size(const int& width, const int& height);
 
@@ -64,6 +65,7 @@ protected:
 
 public:
     void loop();
+    void remember_window_positions(const bool& remember_window_positions_flag = true);
 };
 
 

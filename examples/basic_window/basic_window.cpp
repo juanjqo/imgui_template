@@ -13,6 +13,7 @@ int main()
     parameters.font_size = 18;
 
     Basic_Window_Wrapper basic_window_wrapper(parameters);
+    basic_window_wrapper.remember_window_positions(false);
 
     basic_window_wrapper.loop();
 
