@@ -46,9 +46,6 @@ protected:
     JuanGui_Wrapper(const JuanGui_Wrapper&) = delete;
     JuanGui_Wrapper& operator= (const JuanGui_Wrapper&) = delete;
 
-
-
-
     void check_error_callback();
     bool window_should_close();
     void set_screen_mode(const JuanGui_Wrapper::SCREEN_MODE& mode);
@@ -58,11 +55,10 @@ protected:
     void select_font(const std::string font_path, const int& font_size);
     void stop_and_quit(const bool& break_main_loop_flag);
 
+    virtual void my_custom_gui() = 0;
 
 public:
-
     void loop();
-    virtual void my_custom_gui() = 0;
 };
 
 

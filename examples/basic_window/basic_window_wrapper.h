@@ -5,10 +5,11 @@
 
 class Basic_Window_Wrapper: public JuanGui_Wrapper
 {
-public:
-
-    Basic_Window_Wrapper(const juangui_wrapper_parameters& parameters);
+protected:
     void my_custom_gui() override;
+public:
+    Basic_Window_Wrapper(const juangui_wrapper_parameters& parameters);
+
 };
 
 
