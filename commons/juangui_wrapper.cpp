@@ -256,7 +256,7 @@ void JuanGui_Wrapper::set_next_window_position(const int &x, const int &y)
 
 void JuanGui_Wrapper::set_next_window_size(const int &width, const int &height)
 {
-    ImGui::SetNextWindowSize(ImVec2(width, height), ImGuiCond_Once);
+    ImGui::SetNextWindowSize(ImVec2(width, height), remember_window_positions_);
 }
 
 
