@@ -5,7 +5,6 @@
 #include <iostream>
 #include <filesystem>
 
-
 struct juangui_wrapper_parameters
 {
     int width;

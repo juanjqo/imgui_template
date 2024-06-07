@@ -141,6 +141,10 @@ set(IMPLOT_SRC
     ${IMPLOT_DIR}/implot_demo.cpp
 )
 
+set(IMGUI_TEMPLATE_DIR ${IMGUI_TEMPLATE_DIR})
+configure_file(${COMMONS_DIR}/my_imgui_custom_definitions.h.in
+               ${COMMONS_DIR}/my_imgui_custom_definitions.h)
+
 add_library(imgui-knobs
     ${IMGUI_KNOBS}/imgui-knobs.h
     ${IMGUI_KNOBS}/imgui-knobs.cpp
@@ -181,9 +185,7 @@ endif()
 
 #add_definitions( -DIMGUI_TEMPLATE_DIR=${IMGUI_TEMPLATE_DIR})
 
-set(IMGUI_TEMPLATE_DIR ${IMGUI_TEMPLATE_DIR})
-configure_file(${COMMONS_DIR}/my_imgui_custom_definitions.h.in
-               ${COMMONS_DIR}/my_imgui_custom_definitions.h)
+
 
 #include_directories(${COMMONS_DIR}/my_imgui_custom_definitions.h)
 

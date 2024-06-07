@@ -1,7 +1,7 @@
 #include "basic_window_wrapper.h"
 
 
-int main(int, char**)
+int main()
 {
     juangui_wrapper_parameters parameters;
     parameters.width = 1280;
