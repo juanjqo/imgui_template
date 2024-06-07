@@ -152,6 +152,7 @@ void JuanGui_Wrapper::_start_settings(const int &width,
     }
 
 
+    main_viewport_ = std::make_shared<ImGuiViewport>();
     // This is not working!
     /*
     try {
@@ -236,6 +237,18 @@ void JuanGui_Wrapper::loop()
 void JuanGui_Wrapper::stop_and_quit(const bool& break_main_loop_flag)
 {
     break_main_loop_flag_ = break_main_loop_flag;
+}
+
+void JuanGui_Wrapper::set_next_window_position(const int &x, const int &y)
+{
+    ImGui::SetNextWindowPos(ImVec2( ImGui::GetMainViewport()->WorkPos.x + x,
+                            ImGui::GetMainViewport()->WorkPos.y + y),
+                            ImGuiCond_Once); // ImGuiCond_Once ImGuiCond_FirstUseEver
+}
+
+void JuanGui_Wrapper::set_next_window_size(const int &width, const int &height)
+{
+    ImGui::SetNextWindowSize(ImVec2(width, height), ImGuiCond_Once);
 }
 
 
