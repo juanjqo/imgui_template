@@ -50,7 +50,7 @@ protected:
 
     void check_error_callback();
     bool window_should_close();
-    void set_screen_mode(const JuanGui_Wrapper::SCREEN_MODE& mode);
+
     void set_screen_mode(const std::string& screen_mode);
     void gui();
 
@@ -65,6 +65,7 @@ protected:
 
 public:
     void loop();
+    void set_screen_mode(const JuanGui_Wrapper::SCREEN_MODE& mode);
     void set_background_color(const ImVec4& background_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f));
     void set_rgb_background_color(const double& r, const double& g, const double& b);
     void remember_window_positions(const bool& remember_window_positions_flag = true);
