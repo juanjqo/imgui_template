@@ -13,7 +13,7 @@ int main(int, char**)
     parameters.font_size = 18;
     Imgui_Demo_Wrapper imgui_demo_wrapper(parameters);
 
-
+    imgui_demo_wrapper.set_rgb_background_color(1, 0.79, 0.96);
     imgui_demo_wrapper.loop();
     return 0;
 }

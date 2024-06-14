@@ -201,7 +201,7 @@ void JuanGui_Wrapper::render()
     int display_w, display_h;
     glfwGetFramebufferSize(window_, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
-    glClearColor(clear_color_.x * clear_color_.w, clear_color_.y * clear_color_.w, clear_color_.z * clear_color_.w, clear_color_.w);
+    glClearColor(background_color_.x * background_color_.w, background_color_.y * background_color_.w, background_color_.z * background_color_.w, background_color_.w);
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -232,6 +232,16 @@ void JuanGui_Wrapper::loop()
 
 
     cleanup();
+}
+
+void JuanGui_Wrapper::set_background_color(const ImVec4 &background_color)
+{
+    background_color_ = background_color;
+}
+
+void JuanGui_Wrapper::set_rgb_background_color(const double &r, const double &g, const double &b)
+{
+    background_color_ = ImVec4(r, g, b, 1.00f);
 }
 
 void JuanGui_Wrapper::stop_and_quit(const bool& break_main_loop_flag)
