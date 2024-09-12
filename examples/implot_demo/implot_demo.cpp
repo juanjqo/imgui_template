@@ -10,7 +10,7 @@ int main(int, char**)
     parameters.title = "Juanchotronics";
     parameters.screen_mode = "LIGHT_MODE";
     parameters.font_path = "../../../imgui_template/fonts/Ubuntu/Ubuntu-Regular.ttf";
-    parameters.font_size = 18;
+    parameters.font_size = 16;
     Implot_Demo_Wrapper implot_demo_wrapper(parameters);
 
 

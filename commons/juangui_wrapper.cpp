@@ -7,14 +7,18 @@
 
 
 
-JuanGui_Wrapper::JuanGui_Wrapper(const juangui_wrapper_parameters &parameters)
+JuanGui_Wrapper::JuanGui_Wrapper(const juangui_wrapper_parameters &parameters):
+    width_{parameters.width},
+    height_{parameters.height},
+    title_{parameters.title},
+    screen_mode_{parameters.screen_mode},
+    font_path_{parameters.font_path},
+    font_size_{parameters.font_size},
+    high_resolution_display_{parameters.high_resolution_display}
+
 {
-   _start_settings(parameters.width,
-                    parameters.height,
-                    parameters.title,
-                    parameters.screen_mode,
-                    parameters.font_path,
-                    parameters.font_size);
+    _start_settings();
+
 }
 
 
@@ -53,12 +57,7 @@ bool JuanGui_Wrapper::LoadTextureFromFile(const char* filename, GLuint* out_text
     return true;
 }
 
-void JuanGui_Wrapper::_start_settings(const int &width,
-                                      const int &height,
-                                      const std::string &title,
-                                      const std::string &screen_mode,
-                                      const std::string &font_path,
-                                      const double &font_size)
+void JuanGui_Wrapper::_start_settings()
 {
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -87,7 +86,7 @@ void JuanGui_Wrapper::_start_settings(const int &width,
     //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // 3.0+ only
 #endif
 
-    window_ = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+    window_ = glfwCreateWindow(width_, height_, title_.c_str(), nullptr, nullptr);
     if (window_ == nullptr)
         throw std::runtime_error("Error in window()");
 
@@ -107,7 +106,7 @@ void JuanGui_Wrapper::_start_settings(const int &width,
 
 
 
-    set_screen_mode(screen_mode);
+    set_screen_mode(screen_mode_);
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window_, true);
@@ -136,19 +135,43 @@ void JuanGui_Wrapper::_start_settings(const int &width,
 
     //IM_ASSERT(font != nullptr);
     // Our state
-    std::string default_font_path = font_path;
-    bool status_font_path = std::filesystem::exists(font_path);
 
-    if (status_font_path == false or font_path == std::string("default"))
+    /*
+
+    ImFontConfig::ImFontConfig()
+    {
+        memset(this, 0, sizeof(*this));
+        FontDataOwnedByAtlas = true;
+        OversampleH = 2;
+        OversampleV = 1;
+        GlyphMaxAdvanceX = FLT_MAX;
+        RasterizerMultiply = 1.0f;
+        RasterizerDensity = 1.0f;
+        EllipsisChar = (ImWchar)-1;
+    }
+*/
+
+    if (high_resolution_display_)
+        dpi_ = 2.0;
+    else
+        dpi_ = 1.0;
+
+    auto config = ImFontConfig();
+    config.RasterizerDensity = dpi_;
+
+    std::string default_font_path = font_path_;
+    bool status_font_path = std::filesystem::exists(font_path_);
+
+    if (status_font_path == false or font_path_ == std::string("default"))
     {
         default_font_path = get_imgui_template_path() + std::string("/fonts/Ubuntu/Ubuntu-Regular.ttf");
         //std::cout<<"default_font: "<<default_font_path<<std::endl;
-        io.Fonts->AddFontFromFileTTF(default_font_path.c_str(), static_cast<float>(font_size));
+        io.Fonts->AddFontFromFileTTF(default_font_path.c_str(), static_cast<float>(font_size_), &config);
 
-        if (font_path != std::string("default"))
+        if (font_path_ != std::string("default"))
             std::cerr<<"Your custom font was not found. Ubuntu font is used by default. "<<std::endl;
     }else{
-        io.Fonts->AddFontFromFileTTF(default_font_path.c_str(), static_cast<float>(font_size));
+        io.Fonts->AddFontFromFileTTF(default_font_path.c_str(), static_cast<float>(font_size_), &config);
     }
 
 
@@ -162,6 +185,7 @@ void JuanGui_Wrapper::_start_settings(const int &width,
         io.Fonts->AddFontDefault();
     }
 */
+
 
 
 
@@ -256,6 +280,7 @@ void JuanGui_Wrapper::remember_window_positions(const bool &remember_window_posi
     else
         remember_window_positions_ = ImGuiCond_Once;
 }
+
 
 void JuanGui_Wrapper::set_next_window_position(const int &x, const int &y)
 {
