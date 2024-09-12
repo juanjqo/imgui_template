@@ -11,7 +11,7 @@ int main()
     //parameters.font_path = "../../../imgui_template/fonts/Ubuntu/Ubuntu-Regular.ttf"; //your custom font
     parameters.font_path = "default";
     parameters.font_size = 18;
-    parameters.high_resolution_display = true;
+    //parameters.high_resolution_display = true;
 
     Basic_Window_Wrapper basic_window_wrapper(parameters);
     basic_window_wrapper.remember_window_positions(false);

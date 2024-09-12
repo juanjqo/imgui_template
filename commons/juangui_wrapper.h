@@ -7,13 +7,13 @@
 
 struct juangui_wrapper_parameters
 {
-    int width;
-    int height;
-    std::string title;
-    std::string screen_mode;
+    int width{1280};
+    int height{720};
+    std::string title{"Title"};
+    std::string screen_mode{"LIGHT_MODE"};
     std::string font_path;
-    int font_size;
-    bool high_resolution_display;
+    int font_size{18};
+    bool high_resolution_display{false};
 };
 
 
@@ -30,26 +30,18 @@ protected:
     ImVec4 background_color_ = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     double dpi_ = 1.0;
 
-    int width_ = 1280;
-    int height_ = 720;
-    std::string title_ = "Title";
-    std::string screen_mode_ = "LIGHT_MODE";
+    int width_;
+    int height_;
+    std::string title_;
+    std::string screen_mode_;
     std::string font_path_;
-    int font_size_ = 18;
-    bool high_resolution_display_ = false;
+    int font_size_;
+    bool high_resolution_display_;
 
 
     bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height);
 
     void _start_settings();
-
-    /*
-     * const int& width,
-                         const int& height,
-                         const std::string& title,
-                         const std::string& screen_mode,
-                         const std::string& font_path,
-                         const double& font_size*/
 
     enum class SCREEN_MODE{DARK_MODE, LIGHT_MODE};
 
