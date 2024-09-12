@@ -36,13 +36,12 @@ protected:
     std::string screen_mode_ = "LIGHT_MODE";
     std::string font_path_;
     int font_size_ = 18;
-    bool high_resolution_display_ = 1.0;
+    bool high_resolution_display_ = false;
 
 
     bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height);
 
-    void _start_settings(
-                         );
+    void _start_settings();
 
     /*
      * const int& width,
