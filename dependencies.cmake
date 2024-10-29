@@ -183,6 +183,43 @@ if(UNIX AND NOT APPLE)
     )
 endif()
 
+
+
+
+if (WIN32)
+    set(IMGUI_TOOL_LIBS
+                imgui
+                implot
+                imgui-knobs
+                harry_plotter
+                glfw
+                OpenGL::GL
+                )
+endif()
+
+if(UNIX AND NOT APPLE)
+    set(IMGUI_TOOL_LIBS
+                imgui
+                implot
+                imgui-knobs
+                harry_plotter
+                glfw
+                OpenGL::GL)
+endif()
+
+if(APPLE)
+    set(IMGUI_TOOL_LIBS
+            imgui
+            implot
+            imgui-knobs
+            harry_plotter
+            glfw
+            "-framework Cocoa"
+            "-framework OpenGL"
+            "-framework IOKit")
+endif()
+
+
 #add_definitions( -DIMGUI_TEMPLATE_DIR=${IMGUI_TEMPLATE_DIR})
 
 

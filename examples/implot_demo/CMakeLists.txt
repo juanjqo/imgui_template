@@ -16,34 +16,4 @@ target_link_libraries(${CUSTOM_JUANGUI_WRAPPER} juangui_wrapper)
 
 
 add_executable(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.cpp)
-
-
-if (WIN32)
-    target_link_libraries(${CMAKE_PROJECT_NAME}
-                            imgui
-                            implot
-                            glfw
-                            OpenGL::GL
-                            ${CUSTOM_JUANGUI_WRAPPER}
-                            )
-endif()
-
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${CMAKE_PROJECT_NAME}
-                            imgui
-                            implot
-                            glfw
-                            OpenGL::GL
-                            ${CUSTOM_JUANGUI_WRAPPER})
-endif()
-
-if(APPLE)
-    target_link_libraries(${CMAKE_PROJECT_NAME}
-                            imgui
-                            implot
-                            ${CUSTOM_JUANGUI_WRAPPER}
-                            glfw
-                            "-framework Cocoa"
-                            "-framework OpenGL"
-                            "-framework IOKit")
-endif()
+target_link_libraries(${CMAKE_PROJECT_NAME} ${IMGUI_TOOL_LIBS} ${CUSTOM_JUANGUI_WRAPPER})
