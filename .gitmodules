@@ -25,3 +25,6 @@
 [submodule "submodules/stb"]
 	path = submodules/stb
 	url = https://github.com/nothings/stb.git
+[submodule "submodules/imgui_toggle"]
+	path = submodules/imgui_toggle
+	url = https://github.com/cmdwtf/imgui_toggle.git

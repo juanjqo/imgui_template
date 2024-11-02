@@ -9,7 +9,8 @@ set (IMGUI_DIR  ${IMGUI_TEMPLATE_DIR}/submodules/imgui)
 set (IMPLOT_DIR ${IMGUI_TEMPLATE_DIR}/submodules/implot)
 set (COMMONS_DIR ${IMGUI_TEMPLATE_DIR}/commons)
 set (STB_DIRS    ${IMGUI_TEMPLATE_DIR}/submodules/stb)
-set (IMGUI_KNOBS ${IMGUI_TEMPLATE_DIR}/submodules/imgui-knobs)
+set (IMGUI_KNOBS_DIR ${IMGUI_TEMPLATE_DIR}/submodules/imgui-knobs)
+set (IMGUI_TOGGLE_DIR ${IMGUI_TEMPLATE_DIR}/submodules/imgui_toggle)
 
 if (WIN32)
     # GLFW
@@ -103,7 +104,8 @@ include_directories(${IMGUI_DIR}/backends)
 include_directories(${IMPLOT_DIR})
 include_directories(${COMMONS_DIR})
 include_directories(${STB_DIRS})
-include_directories(${IMGUI_KNOBS})
+include_directories(${IMGUI_KNOBS_DIR})
+include_directories(${IMGUI_TOGGLE_DIR})
 
 
 set(IMGUI_HEADERS
@@ -141,14 +143,32 @@ set(IMPLOT_SRC
     ${IMPLOT_DIR}/implot_demo.cpp
 )
 
+set(IMGUI_TOGGLE_HEADERS
+    ${IMGUI_TOGGLE_DIR}/imgui_toggle.h
+    ${IMGUI_TOGGLE_DIR}/imgui_offset_rect.h
+    ${IMGUI_TOGGLE_DIR}/imgui_toggle_math.h
+    ${IMGUI_TOGGLE_DIR}/imgui_toggle_palette.h
+    ${IMGUI_TOGGLE_DIR}/imgui_toggle_presets.h
+    ${IMGUI_TOGGLE_DIR}/imgui_toggle_renderer.h
+)
+
+set(IMGUI_TOGGLE_SRC
+    ${IMGUI_TOGGLE_DIR}/imgui_toggle.cpp
+    ${IMGUI_TOGGLE_DIR}/imgui_toggle_palette.cpp
+    ${IMGUI_TOGGLE_DIR}/imgui_toggle_presets.cpp
+    ${IMGUI_TOGGLE_DIR}/imgui_toggle_renderer.cpp
+)
+
 set(IMGUI_TEMPLATE_DIR ${IMGUI_TEMPLATE_DIR})
 configure_file(${COMMONS_DIR}/my_imgui_custom_definitions.h.in
                ${COMMONS_DIR}/my_imgui_custom_definitions.h)
 
 add_library(imgui-knobs
-    ${IMGUI_KNOBS}/imgui-knobs.h
-    ${IMGUI_KNOBS}/imgui-knobs.cpp
+    ${IMGUI_KNOBS_DIR}/imgui-knobs.h
+    ${IMGUI_KNOBS_DIR}/imgui-knobs.cpp
 )
+
+add_library(imgui_toggle ${IMGUI_TOGGLE_HEADERS} ${IMGUI_TOGGLE_SRC})
 
 add_library(juancho-tools
     ${COMMONS_DIR}/juancho_tools.h
@@ -169,10 +189,14 @@ if(UNIX AND NOT APPLE)
         imgui
         implot
         imgui-knobs
+        imgui_toggle
         glfw
         OpenGL::GL)
 
     target_link_libraries(imgui-knobs
+        imgui)
+
+    target_link_libraries(imgui_toggle
         imgui)
 
     target_link_libraries(harry_plotter
@@ -191,6 +215,7 @@ if (WIN32)
                 imgui
                 implot
                 imgui-knobs
+                imgui_toggle
                 harry_plotter
                 glfw
                 OpenGL::GL
@@ -202,6 +227,7 @@ if(UNIX AND NOT APPLE)
                 imgui
                 implot
                 imgui-knobs
+                imgui_toggle
                 harry_plotter
                 glfw
                 OpenGL::GL)
@@ -212,6 +238,7 @@ if(APPLE)
             imgui
             implot
             imgui-knobs
+            imgui_toggle
             harry_plotter
             glfw
             "-framework Cocoa"

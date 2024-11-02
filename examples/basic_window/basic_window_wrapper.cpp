@@ -94,14 +94,15 @@ void Basic_Window_Wrapper::my_custom_gui()
         ImGui::End();
     }*/
     show_output_leds();
+    show_other_artifacts();
 }
 
 void Basic_Window_Wrapper::show_output_leds()
 {
-    static bool ledvals[8];
+    static std::vector<bool> ledvals(8, false);
     for (uint32_t i = 0; i < 8; i++)
     {
-        ledvals[i] = true;
+        ledvals.at(i) = true;
     }
 
     ImGui::Begin("Output Leds");
@@ -115,12 +116,25 @@ void Basic_Window_Wrapper::show_output_leds()
     for (int i = 0; i < 8; i++) {
         ImGui::PushID(i);
         ImGui::Text("%d", 7-i);
-        ImGui::RadioButton("", &ledvals[7-i]);
+        ImGui::RadioButton("", ledvals.at(7-1));
         ImGui::NextColumn();
         ImGui::PopID();
     }
 
     // undo the change to the checkmark colour
     ImGui::PopStyleColor();
+    ImGui::End();
+}
+
+void Basic_Window_Wrapper::show_other_artifacts()
+{
+    static std::vector<bool> values(8,true);
+    static bool flag = false;
+    size_t value_index = 0;
+
+    ImGui::Begin("Artifacts");
+    ImGui::Toggle("Default", &flag);
+    ImGui::Toggle("Animated Toggle", &flag, ImGuiToggleFlags_Animated);
+
     ImGui::End();
 }
