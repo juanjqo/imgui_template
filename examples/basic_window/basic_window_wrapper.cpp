@@ -40,6 +40,7 @@ void Basic_Window_Wrapper::my_custom_gui()
             // value was changed
         }
         ImGui::End();
+
     }
 
     {
@@ -92,4 +93,34 @@ void Basic_Window_Wrapper::my_custom_gui()
 
         ImGui::End();
     }*/
+    show_output_leds();
+}
+
+void Basic_Window_Wrapper::show_output_leds()
+{
+    static bool ledvals[8];
+    for (uint32_t i = 0; i < 8; i++)
+    {
+        ledvals[i] = true;
+    }
+
+    ImGui::Begin("Output Leds");
+    ImGui::Text("Leds");
+
+    // Arrange the checkboxes and text labels in 8 columns
+    ImGui::Columns(8, 0, false);
+    // Make the check colour green, a much better LED colour
+    ImGui::PushStyleColor(ImGuiCol_CheckMark, ImVec4(0, 1, 0, 1));
+
+    for (int i = 0; i < 8; i++) {
+        ImGui::PushID(i);
+        ImGui::Text("%d", 7-i);
+        ImGui::RadioButton("", &ledvals[7-i]);
+        ImGui::NextColumn();
+        ImGui::PopID();
+    }
+
+    // undo the change to the checkmark colour
+    ImGui::PopStyleColor();
+    ImGui::End();
 }
