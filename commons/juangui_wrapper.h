@@ -66,6 +66,7 @@ protected:
     ImGuiCond_ remember_window_positions_ = ImGuiCond_Once;
     void set_next_window_position(const int& x, const int& y);
     void set_next_window_size(const int& width, const int& height);
+    void add_help_marker(const std::string& desc);
 
     virtual void my_custom_gui() = 0;
 

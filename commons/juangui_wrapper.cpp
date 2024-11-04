@@ -342,6 +342,18 @@ void JuanGui_Wrapper::set_screen_mode(const std::string &screen_mode)
     }
 }
 
+void JuanGui_Wrapper::add_help_marker(const std::string& desc)
+{
+    ImGui::TextDisabled("(?)");
+    if (ImGui::BeginItemTooltip())
+    {
+        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+        ImGui::TextUnformatted(desc.c_str());
+        ImGui::PopTextWrapPos();
+        ImGui::EndTooltip();
+    }
+}
+
 
 
 
