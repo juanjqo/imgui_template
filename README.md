@@ -5,7 +5,9 @@
 
 # Imgui_template
 
-
+```shell
+git clone https://github.com/juanjqo/imgui_template.git --recursive
+```
 
 ## MacOS requirements
 
